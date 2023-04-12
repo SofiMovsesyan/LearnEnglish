@@ -13,4 +13,7 @@
     <color name="my_blue">#B4E4FF</color>
     <color name="my_gray">#323232</color>
 
+    <color name="grad_clr_start">#a8edea</color>
+    <color name="grad_clr_end">#fed6e3</color>
+
 </resources>
