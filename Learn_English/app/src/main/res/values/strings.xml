@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Learn English</string>
+    <string-array name="filters">
+        <item>Present Simple</item>
+        <item>Present Continuous</item>
+        <item>Present Perfect</item>
+        <item>Present Perfect Continuous</item>
+        <item>Past Simple</item>
+        <item>Past Continuous</item>
+        <item>Past Perfect</item>
+        <item>Past Perfect Continuous</item>
+        <item>Future Simple</item>
+        <item>Future Continuous</item>
+        <item>Future Perfect</item>
+        <item>Future Perfect Continuous</item>
+    </string-array>
 </resources>

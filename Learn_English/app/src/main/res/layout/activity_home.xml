@@ -8,46 +8,59 @@
     android:background="#ECF2FF"
     tools:context=".HomeActivity">
 
-    <Button
-        android:id="@+id/button"
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/tenses"
         android:layout_width="275dp"
         android:layout_height="80dp"
         android:layout_marginStart="158dp"
-        android:layout_marginTop="205dp"
+        android:layout_marginTop="67dp"
         android:layout_marginEnd="158dp"
-        android:background="@drawable/rounded_ui"
+        android:background="@drawable/rounded_borders"
         android:text="Tenses"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-    <Button
-        android:id="@+id/button2"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/words"
         android:layout_width="275dp"
         android:layout_height="80dp"
         android:layout_marginTop="40dp"
-        android:background="@drawable/rounded_ui"
+        android:background="@drawable/rounded_borders"
         android:text="Words"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/tenses" />
 
-    <Button
-        android:id="@+id/button3"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/prepositions"
         android:layout_width="275dp"
         android:layout_height="80dp"
         android:layout_marginStart="146dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="171dp"
         android:layout_marginBottom="214dp"
-        android:background="@drawable/rounded_ui"
+        android:background="@drawable/rounded_borders"
         android:text="Prepositions"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.43"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
+        app:layout_constraintTop_toBottomOf="@+id/words"
         app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="204dp"
+        android:layout_height="126dp"
+        android:layout_marginStart="103dp"
+        android:layout_marginTop="75dp"
+        android:layout_marginEnd="104dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/myappicon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
