@@ -25,12 +25,12 @@ public class QuestionsBankTenses {
         private static List<QuestionsList> bQuestions() {
             final List<QuestionsList> questionsList = new ArrayList<>();
 
-            final QuestionsList question1 = new QuestionsList("ABC",
-                    "D", "E",
-                    "F", "G",
-                    "D", "");
-            final QuestionsList question2 = new QuestionsList("123",
-                    "4", "5", "6", "7", "4",
+            final QuestionsList question1 = new QuestionsList("I … (to arrive) in London at last.",
+                    "arrive", "arrived",
+                    "have arrived\n", "am arriving",
+                    "arrived", "");
+            final QuestionsList question2 = new QuestionsList("In England, each man ... different language.",
+                    "speaks", "is speaking", "is going to speak", "speak", "speaks",
                     "");
 
             questionsList.add(question1);

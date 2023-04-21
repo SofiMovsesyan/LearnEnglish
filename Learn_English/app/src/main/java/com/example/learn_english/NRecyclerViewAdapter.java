@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class NRecyclerViewAdapter extends RecyclerView.Adapter<NRecyclerViewAdapter.MyViewHolder> {
-
+    private String selectedTopicName = "";
     Context context;
     ArrayList<TensesModel> tensesModels;
 //    private final RecycleViewInterface recycleViewInterface;
@@ -36,6 +36,18 @@ public class NRecyclerViewAdapter extends RecyclerView.Adapter<NRecyclerViewAdap
     @Override
     public void onBindViewHolder(@NonNull NRecyclerViewAdapter.MyViewHolder holder, int position) {
         holder.tenseName.setText(tensesModels.get(position).getTenseName());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, QuizActivityTenses.class);
+                intent.putExtra("selectedTopic",tensesModels.get(position).getTenseName());
+                Toast.makeText(context, intent.getStringExtra("selectedTopic"), Toast.LENGTH_SHORT).show();
+//                intent.putExtra("title", data.getTitle());
+//                intent.putExtra("description", data.getDescription());
+
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -55,6 +67,7 @@ public class NRecyclerViewAdapter extends RecyclerView.Adapter<NRecyclerViewAdap
         public  MyViewHolder(@NonNull View itemView) {
             super(itemView);
             tenseName = itemView.findViewById(R.id.tenseName);
+
 //            itemView.setOnClickListener(new View.OnClickListener(){
 //                @Override
 //                public void onClick(View v) {

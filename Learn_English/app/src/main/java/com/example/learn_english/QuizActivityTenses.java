@@ -110,20 +110,25 @@ public class QuizActivityTenses extends AppCompatActivity {
             curQuestPos++;
             if ((curQuestPos+1) == questionsLists.size()) {
                 nextBtn.setText("Finish");
-//                ForRes();
+                nextBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ForRes();
+                    }
+                });
             }
             if (curQuestPos < questionsLists.size()) {
                 selectedOptionByUser = "";
-                option1.setBackgroundColor(Color.GRAY);
+                option1.setBackgroundDrawable(getResources().getDrawable(R.drawable.rounded_borderes_options));
                 option1.setTextColor(Color.parseColor("#1F6BB8"));
 
-                option2.setBackgroundColor(Color.GRAY);
+                option2.setBackgroundDrawable(getResources().getDrawable(R.drawable.rounded_borderes_options));
                 option2.setTextColor(Color.parseColor("#1F6BB8"));
 
-                option3.setBackgroundColor(Color.GRAY);
+                option3.setBackgroundDrawable(getResources().getDrawable(R.drawable.rounded_borderes_options));
                 option3.setTextColor(Color.parseColor("#1F6BB8"));
 
-                option4.setBackgroundColor(Color.GRAY);
+                option4.setBackgroundDrawable(getResources().getDrawable(R.drawable.rounded_borderes_options));
                 option4.setTextColor(Color.parseColor("#1F6BB8"));
 
                 questions.setText((curQuestPos+1)+"/"+questionsLists.size());
@@ -133,23 +138,19 @@ public class QuizActivityTenses extends AppCompatActivity {
                 option3.setText(questionsLists.get(curQuestPos).getOption3());
                 option4.setText(questionsLists.get(curQuestPos).getOption4());
             }
-            else {
-//                Intent intent = new Intent(QuizActivityTenses.this, QuizResults.class);
-//                intent.putExtra("correct", getCorrectAnswers());
-//                intent.putExtra("incorrect", getInCorrectAnswers());
-//                startActivity(intent);
-//                finish();
-            }
+//            else {
+//                ForRes();
+//            }
         }
-//        private void ForRes() {
-//            Intent intent = new Intent(QuizActivityTenses.this, QuizResults.class);
-//            intent.putExtra("correct", getCorrectAnswers());
-//            intent.putExtra("incorrect", getInCorrectAnswers());
-//            startActivity(intent);
-//            finish();
-//
-//
-//        }
+        private void ForRes() {
+            Intent intent = new Intent(QuizActivityTenses.this, QuizResults.class);
+            intent.putExtra("correct", getCorrectAnswers());
+            intent.putExtra("incorrect", getInCorrectAnswers());
+            startActivity(intent);
+            finish();
+
+
+        }
 
         private int getCorrectAnswers() {
             int correctAnswers = 0;
@@ -199,4 +200,4 @@ public class QuizActivityTenses extends AppCompatActivity {
 
 
     }
-}
+//}

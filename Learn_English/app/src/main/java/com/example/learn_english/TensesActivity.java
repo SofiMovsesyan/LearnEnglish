@@ -16,7 +16,6 @@ import java.util.ArrayList;
 
 public class TensesActivity extends AppCompatActivity{
     ArrayList<TensesModel> tensesModels = new ArrayList<>();
-    private String selectedTopicName = "";
     CardView Tense;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -33,13 +32,13 @@ public class TensesActivity extends AppCompatActivity{
 //        Toast.makeText(this, yourClikedItem, Toast.LENGTH_SHORT).show();
 
 
-        Tense = findViewById(R.id.Tense);
-        Tense.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Toast.makeText(TensesActivity.this, "AAAA", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        Tense = findViewById(R.id.Tense);
+//        Tense.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                Toast.makeText(TensesActivity.this, "AAAA", Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 
     private void setUpTenses() {
