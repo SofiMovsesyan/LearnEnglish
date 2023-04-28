@@ -11,7 +11,7 @@ TextView correct, incorrect;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_results);
-        correct = findViewById(R.id.correct);
+        correct = findViewById(R.id.correct); 
         correct.setText(getIntent().getStringExtra("correct"));
         incorrect = findViewById(R.id.incorrect);
         incorrect.setText(getIntent().getStringExtra("correct"));

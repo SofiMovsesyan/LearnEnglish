@@ -32,10 +32,15 @@ public class QuestionsBankTenses {
             final QuestionsList question2 = new QuestionsList("In England, each man ... different language.",
                     "speaks", "is speaking", "is going to speak", "speak", "speaks",
                     "");
+            final QuestionsList question3 = new QuestionsList("a",
+                    "b", "c",
+                    "have arrived\n", "am arriving",
+                    "b", "");
 
             questionsList.add(question1);
             questionsList.add(question2);
 
+            questionsList.add(question3);
             return questionsList;
         }
 

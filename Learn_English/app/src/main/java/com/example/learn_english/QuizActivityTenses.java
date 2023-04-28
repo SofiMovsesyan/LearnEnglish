@@ -106,18 +106,23 @@ public class QuizActivityTenses extends AppCompatActivity {
 
         }
 
+        private boolean flag = false;
         private void changeNextQuestion() {
             curQuestPos++;
-            if ((curQuestPos+1) == questionsLists.size()) {
+
+            if (curQuestPos == (questionsLists.size()-1)) {
                 nextBtn.setText("Finish");
-                nextBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        ForRes();
-                    }
-                });
+            }
+            else if (curQuestPos == questionsLists.size()) {
+                flag = true;
+//                ForRes();
+            }
+            if (flag==true) {
+
+                ForRes();
             }
             if (curQuestPos < questionsLists.size()) {
+
                 selectedOptionByUser = "";
                 option1.setBackgroundDrawable(getResources().getDrawable(R.drawable.rounded_borderes_options));
                 option1.setTextColor(Color.parseColor("#1F6BB8"));
@@ -137,10 +142,14 @@ public class QuizActivityTenses extends AppCompatActivity {
                 option2.setText(questionsLists.get(curQuestPos).getOption2());
                 option3.setText(questionsLists.get(curQuestPos).getOption3());
                 option4.setText(questionsLists.get(curQuestPos).getOption4());
+//                if (flag) {
+//                    ForRes();
+//                }
+//                curQuestPos++;
             }
-//            else {
-//                ForRes();
-//            }
+            else {
+                ForRes();
+            }
         }
         private void ForRes() {
             Intent intent = new Intent(QuizActivityTenses.this, QuizResults.class);
