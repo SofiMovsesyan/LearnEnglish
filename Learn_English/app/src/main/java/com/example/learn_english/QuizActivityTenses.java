@@ -46,7 +46,7 @@ public class QuizActivityTenses extends AppCompatActivity {
                 public void onClick(View v) {
                     if (selectedOptionByUser.isEmpty()) {
                         selectedOptionByUser = option1.getText().toString();
-                        option1.setBackgroundColor(Color.RED);
+                        option1.setBackgroundResource(R.drawable.rounded_borderes_wrong);
                         option1.setTextColor(Color.WHITE);
                         revealAnswer();
                         questionsLists.get(curQuestPos).setUserSelectedAnswer(selectedOptionByUser);
@@ -59,7 +59,7 @@ public class QuizActivityTenses extends AppCompatActivity {
                 public void onClick(View v) {
                     if (selectedOptionByUser.isEmpty()) {
                         selectedOptionByUser = option2.getText().toString();
-                        option2.setBackgroundColor(Color.RED);
+                        option2.setBackgroundResource(R.drawable.rounded_borderes_wrong);
                         option2.setTextColor(Color.WHITE);
                         revealAnswer();
                         questionsLists.get(curQuestPos).setUserSelectedAnswer(selectedOptionByUser);
@@ -71,7 +71,7 @@ public class QuizActivityTenses extends AppCompatActivity {
                 public void onClick(View v) {
                     if (selectedOptionByUser.isEmpty()) {
                         selectedOptionByUser = option3.getText().toString();
-                        option3.setBackgroundColor(Color.RED);
+                        option3.setBackgroundResource(R.drawable.rounded_borderes_wrong);
                         option3.setTextColor(Color.WHITE);
                         revealAnswer();
                         questionsLists.get(curQuestPos).setUserSelectedAnswer(selectedOptionByUser);
@@ -84,7 +84,7 @@ public class QuizActivityTenses extends AppCompatActivity {
                 public void onClick(View v) {
                     if (selectedOptionByUser.isEmpty()) {
                         selectedOptionByUser = option4.getText().toString();
-                        option4.setBackgroundColor(Color.RED);
+                        option4.setBackgroundResource(R.drawable.rounded_borderes_wrong);
                         option4.setTextColor(Color.WHITE);
                         revealAnswer();
                         questionsLists.get(curQuestPos).setUserSelectedAnswer(selectedOptionByUser);
@@ -190,19 +190,19 @@ public class QuizActivityTenses extends AppCompatActivity {
         private void  revealAnswer() {
             final String getAnswer = questionsLists.get(curQuestPos).getAnswer();
             if (option1.getText().toString().equals(getAnswer)) {
-                option1.setBackgroundColor(Color.GREEN);
+                option1.setBackgroundResource(R.drawable.rounded_borderes_correct);
                 option1.setTextColor(Color.WHITE);
             }
             else if (option2.getText().toString().equals(getAnswer)) {
-                option2.setBackgroundColor(Color.GREEN);
+                option2.setBackgroundResource(R.drawable.rounded_borderes_correct);
                 option2.setTextColor(Color.WHITE);
             }
             else if (option3.getText().toString().equals(getAnswer)) {
-                option3.setBackgroundColor(Color.GREEN);
+                option3.setBackgroundResource(R.drawable.rounded_borderes_correct);
                 option3.setTextColor(Color.WHITE);
             }
             else if (option4.getText().toString().equals(getAnswer)) {
-                option4.setBackgroundColor(Color.GREEN);
+                option4.setBackgroundResource(R.drawable.rounded_borderes_correct);
                 option4.setTextColor(Color.WHITE);
             }
         }

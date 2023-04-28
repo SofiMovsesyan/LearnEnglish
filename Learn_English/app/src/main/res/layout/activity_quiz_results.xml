@@ -6,22 +6,57 @@
     android:layout_height="match_parent"
     tools:context=".QuizResults">
 
+
     <TextView
-        android:id="@+id/correct"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
+        android:id="@+id/textView"
+        android:layout_width="246dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="169dp"
+        android:layout_marginTop="136dp"
+        android:layout_marginEnd="184dp"
+        android:text="Your Results:"
+        android:textAlignment="center"
+        android:textColor="#ff0000"
+        android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.452"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="248dp"
+        android:layout_height="81dp"
+        android:layout_marginStart="129dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="130dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.458"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/correct"
+        android:layout_width="403dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="72dp"
+        android:text="You answered x questions correct"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+
     <TextView
         android:id="@+id/incorrect"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="407dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="46dp"
+        android:text="You answered y questions incorrect"
+        android:textAlignment="center"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/correct" />
