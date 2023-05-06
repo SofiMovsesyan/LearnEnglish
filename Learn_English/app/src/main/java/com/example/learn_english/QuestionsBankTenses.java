@@ -31,7 +31,7 @@ public class QuestionsBankTenses {
             questionsList.add(question2);*/
 
         DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference()
-                .child("Tenses").child("A").child("Quiz").child("1");
+                .child("Tenses").child("Present Simple").child("Quiz");
 
         firebaseDatabase.addValueEventListener(new ValueEventListener() {
             @Override
