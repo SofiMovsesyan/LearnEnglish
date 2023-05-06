@@ -20,6 +20,6 @@ ProgressBar progressBar;
         incorrect = findViewById(R.id.incorrect);
         incorrect.setText(getIntent().getStringExtra("correct"));
         progressBar = findViewById(R.id.progressBar);
-        progressBar.setProgress(50);
+        progressBar.setProgress(25);
     }
 }

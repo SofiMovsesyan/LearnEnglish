@@ -16,6 +16,7 @@ public class QuizActivityTenses extends AppCompatActivity {
     private TextView questions, question;
     private AppCompatButton option1, option2, option3, option4, nextBtn;
     private List<QuestionsList> questionsLists;
+    private int rightAnswers = 0;
 
     private int curQuestPos = 0;
     private String selectedOptionByUser = "";
@@ -35,22 +36,18 @@ public class QuizActivityTenses extends AppCompatActivity {
             selectedTopicName.setText(getSelectedTopicName);
             questionsLists = QuestionsBankTenses.getQuestions(getSelectedTopicName);
             questions.setText((curQuestPos + 1) + "/" + questionsLists.size());
-            question.setText(questionsLists.get(0).getQuestion());
+            question.setText(questionsLists.get(0).getQuestion1());
             option1.setText(questionsLists.get(0).getOption1());
             option2.setText(questionsLists.get(0).getOption2());
             option3.setText(questionsLists.get(0).getOption3());
             option4.setText(questionsLists.get(0).getOption4());
 
-            option1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (selectedOptionByUser.isEmpty()) {
-                        selectedOptionByUser = option1.getText().toString();
-                        option1.setBackgroundResource(R.drawable.rounded_borderes_wrong);
-                        option1.setTextColor(Color.WHITE);
-                        revealAnswer();
-                        questionsLists.get(curQuestPos).setUserSelectedAnswer(selectedOptionByUser);
-                    }
+            option1.setOnClickListener(v -> {
+                if (selectedOptionByUser.isEmpty()) {
+                    selectedOptionByUser = option1.getText().toString();
+                    option1.setBackgroundResource(R.drawable.rounded_borderes_wrong);
+                    option1.setTextColor(Color.WHITE);
+                    revealAnswer();
                 }
             });
 
@@ -62,7 +59,6 @@ public class QuizActivityTenses extends AppCompatActivity {
                         option2.setBackgroundResource(R.drawable.rounded_borderes_wrong);
                         option2.setTextColor(Color.WHITE);
                         revealAnswer();
-                        questionsLists.get(curQuestPos).setUserSelectedAnswer(selectedOptionByUser);
                     }
                 }
             });
@@ -74,7 +70,6 @@ public class QuizActivityTenses extends AppCompatActivity {
                         option3.setBackgroundResource(R.drawable.rounded_borderes_wrong);
                         option3.setTextColor(Color.WHITE);
                         revealAnswer();
-                        questionsLists.get(curQuestPos).setUserSelectedAnswer(selectedOptionByUser);
                     }
                 }
             });
@@ -87,7 +82,6 @@ public class QuizActivityTenses extends AppCompatActivity {
                         option4.setBackgroundResource(R.drawable.rounded_borderes_wrong);
                         option4.setTextColor(Color.WHITE);
                         revealAnswer();
-                        questionsLists.get(curQuestPos).setUserSelectedAnswer(selectedOptionByUser);
                     }
                 }
             });
@@ -137,7 +131,7 @@ public class QuizActivityTenses extends AppCompatActivity {
                 option4.setTextColor(Color.parseColor("#1F6BB8"));
 
                 questions.setText((curQuestPos+1)+"/"+questionsLists.size());
-                question.setText(questionsLists.get(curQuestPos).getQuestion());
+                question.setText(questionsLists.get(curQuestPos).getQuestion1());
                 option1.setText(questionsLists.get(curQuestPos).getOption1());
                 option2.setText(questionsLists.get(curQuestPos).getOption2());
                 option3.setText(questionsLists.get(curQuestPos).getOption3());
@@ -153,38 +147,13 @@ public class QuizActivityTenses extends AppCompatActivity {
         }
         private void ForRes() {
             Intent intent = new Intent(QuizActivityTenses.this, QuizResults.class);
-            intent.putExtra("correct", getCorrectAnswers());
-            intent.putExtra("incorrect", getInCorrectAnswers());
+            intent.putExtra("correct", rightAnswers);
+//            intent.putExtra("incorrect", getInCorrectAnswers());
             startActivity(intent);
             finish();
 
 
         }
-
-        private int getCorrectAnswers() {
-            int correctAnswers = 0;
-            for (int i = 0; i < questionsLists.size(); i++) {
-                final String getUserSelectedAnswer = questionsLists.get(i).getUserSelectedAnswer();
-                final String getAnswer = questionsLists.get(i).getAnswer();
-                if (getUserSelectedAnswer.equals(getAnswer)) {
-                    correctAnswers++;
-                }
-            }
-            return correctAnswers;
-        }
-
-        private int getInCorrectAnswers() {
-            int correctAnswers = 0;
-            for (int i = 0; i < questionsLists.size(); i++) {
-                final String getUserSelectedAnswer = questionsLists.get(i).getUserSelectedAnswer();
-                final String getAnswer = questionsLists.get(i).getAnswer();
-                if (!getUserSelectedAnswer.equals(getAnswer)) {
-                    correctAnswers++;
-                }
-            }
-            return correctAnswers;
-        }
-
 
 
         private void  revealAnswer() {
@@ -192,18 +161,22 @@ public class QuizActivityTenses extends AppCompatActivity {
             if (option1.getText().toString().equals(getAnswer)) {
                 option1.setBackgroundResource(R.drawable.rounded_borderes_correct);
                 option1.setTextColor(Color.WHITE);
+                rightAnswers++;
             }
             else if (option2.getText().toString().equals(getAnswer)) {
                 option2.setBackgroundResource(R.drawable.rounded_borderes_correct);
                 option2.setTextColor(Color.WHITE);
+                rightAnswers++;
             }
             else if (option3.getText().toString().equals(getAnswer)) {
                 option3.setBackgroundResource(R.drawable.rounded_borderes_correct);
                 option3.setTextColor(Color.WHITE);
+                rightAnswers++;
             }
             else if (option4.getText().toString().equals(getAnswer)) {
                 option4.setBackgroundResource(R.drawable.rounded_borderes_correct);
                 option4.setTextColor(Color.WHITE);
+                rightAnswers++;
             }
         }
 

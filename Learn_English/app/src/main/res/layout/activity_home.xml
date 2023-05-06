@@ -38,15 +38,12 @@
         android:id="@+id/prepositions"
         android:layout_width="275dp"
         android:layout_height="80dp"
-        android:layout_marginStart="146dp"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="171dp"
         android:layout_marginBottom="214dp"
         android:background="@drawable/rounded_borders"
         android:text="Prepositions"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.43"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/words"
         app:layout_constraintVertical_bias="0.0" />
@@ -62,5 +59,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/myappicon" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log out"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

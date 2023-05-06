@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.ktx.Firebase;
 
 public class HomeActivity extends AppCompatActivity {
+    Button button;
     AppCompatButton tenses;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,19 +30,19 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
         /* Log out */
-//        button = findViewById(R.id.button);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                FirebaseAuth.getInstance().signOut();
-//                SharedPreferences sharedPreferences = getSharedPreferences(MainActivity.PREFS_NAME, 0);
-//                SharedPreferences.Editor editor = sharedPreferences.edit();
-//                editor.putBoolean("hasLoggedIn", false);
-//                editor.commit();
-//                Intent intent = new Intent(HomeActivity.this, MainActivity.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
+        button = findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                SharedPreferences sharedPreferences = getSharedPreferences(MainActivity.PREFS_NAME, 0);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("hasLoggedIn", false);
+                editor.commit();
+                Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 }

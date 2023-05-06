@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
     String emailPattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
     ProgressDialog progressDialog;
 
-
     FirebaseAuth mAuth;
     FirebaseUser mUser;
 
@@ -36,8 +35,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-
 
         crAcc = findViewById(R.id.crAcc);
         err = findViewById(R.id.err);
