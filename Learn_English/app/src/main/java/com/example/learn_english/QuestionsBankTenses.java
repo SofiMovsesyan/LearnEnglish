@@ -17,10 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionsBankTenses {
-    private static List<QuestionsList> aQuestions() {
+    /*private static List<QuestionsList> aQuestions() {
         final List<QuestionsList> questionsList = new ArrayList<>();
 
-            /*final QuestionsList question1 = new QuestionsList("Please be quiet. The children ...(sleep)",
+            *//*final QuestionsList question1 = new QuestionsList("Please be quiet. The children ...(sleep)",
                     "sleeping", "are sleeping",
                     "have slept", "sleep",
                     "are sleeping");
@@ -28,10 +28,10 @@ public class QuestionsBankTenses {
                     "is studying", "studied", "have studied", "are studying", "is studying");
 
             questionsList.add(question1);
-            questionsList.add(question2);*/
+            questionsList.add(question2);*//*
 
         DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference()
-                .child("Tenses").child("Present Simple").child("Quiz");
+                .child("tenses");
 
         firebaseDatabase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -87,7 +87,7 @@ public class QuestionsBankTenses {
                 default:
                     return bQuestions();
             }
-        }
+        }*/
 
     }
 
