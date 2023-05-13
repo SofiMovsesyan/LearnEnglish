@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,8 +25,10 @@ import java.util.concurrent.CountDownLatch;
 
 public class QuizActivityTenses extends AppCompatActivity {
     private TextView questions, question;
+    private ProgressBar progressBar;
     private AppCompatButton option1, option2, option3, option4, nextBtn;
-    private List<QuestionsList> questionsLists;
+    final List<QuestionsList> questionsLists = new ArrayList<>();
+    private String getSelectedTopicName;
     private int rightAnswers = 0;
 
     private int curQuestPos = 0;
@@ -37,7 +40,7 @@ public class QuizActivityTenses extends AppCompatActivity {
         setContentView(R.layout.activity_quiz_tenses);
 
         final TextView selectedTopicName = findViewById(R.id.topicName);
-        final String getSelectedTopicName = getIntent().getStringExtra("selectedTopic");
+        getSelectedTopicName = getIntent().getStringExtra("selectedTopic");
         questions = findViewById(R.id.questions);
         question = findViewById(R.id.question);
         option1 = findViewById(R.id.option1);
@@ -45,15 +48,10 @@ public class QuizActivityTenses extends AppCompatActivity {
         option3 = findViewById(R.id.option3);
         option4 = findViewById(R.id.option4);
         nextBtn = findViewById(R.id.nextBtn);
+        progressBar = findViewById(R.id.progressBar2);
         selectedTopicName.setText(getSelectedTopicName);
 
-//        questionsLists = new ArrayList<>();
-//        questionsLists.add(new QuestionsList("sdf", "sdfs","k","o","oo","k"));
-//        questionsLists = QuestionsBankTenses.getQuestions(getSelectedTopicName);
         loadQuestions();
-
-
-
 
         option1.setOnClickListener(v -> {
             if (selectedOptionByUser.isEmpty()) {
@@ -64,49 +62,37 @@ public class QuizActivityTenses extends AppCompatActivity {
             }
         });
 
-        option2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (selectedOptionByUser.isEmpty()) {
-                    selectedOptionByUser = option2.getText().toString();
-                    option2.setBackgroundResource(R.drawable.rounded_borderes_wrong);
-                    option2.setTextColor(Color.WHITE);
-                    revealAnswer();
-                }
+        option2.setOnClickListener(v -> {
+            if (selectedOptionByUser.isEmpty()) {
+                selectedOptionByUser = option2.getText().toString();
+                option2.setBackgroundResource(R.drawable.rounded_borderes_wrong);
+                option2.setTextColor(Color.WHITE);
+                revealAnswer();
             }
         });
-        option3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (selectedOptionByUser.isEmpty()) {
-                    selectedOptionByUser = option3.getText().toString();
-                    option3.setBackgroundResource(R.drawable.rounded_borderes_wrong);
-                    option3.setTextColor(Color.WHITE);
-                    revealAnswer();
-                }
+        option3.setOnClickListener(v -> {
+            if (selectedOptionByUser.isEmpty()) {
+                selectedOptionByUser = option3.getText().toString();
+                option3.setBackgroundResource(R.drawable.rounded_borderes_wrong);
+                option3.setTextColor(Color.WHITE);
+                revealAnswer();
             }
         });
 
-        option4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (selectedOptionByUser.isEmpty()) {
-                    selectedOptionByUser = option4.getText().toString();
-                    option4.setBackgroundResource(R.drawable.rounded_borderes_wrong);
-                    option4.setTextColor(Color.WHITE);
-                    revealAnswer();
-                }
+        option4.setOnClickListener(v -> {
+            if (selectedOptionByUser.isEmpty()) {
+                selectedOptionByUser = option4.getText().toString();
+                option4.setBackgroundResource(R.drawable.rounded_borderes_wrong);
+                option4.setTextColor(Color.WHITE);
+                revealAnswer();
             }
         });
 
-        nextBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (selectedOptionByUser.isEmpty()) {
-                    Toast.makeText(QuizActivityTenses.this, "Pls select an option", Toast.LENGTH_SHORT).show();
-                } else {
-                    changeNextQuestion();
-                }
+        nextBtn.setOnClickListener(v -> {
+            if (selectedOptionByUser.isEmpty()) {
+                Toast.makeText(QuizActivityTenses.this, "Pls select an option", Toast.LENGTH_SHORT).show();
+            } else {
+                changeNextQuestion();
             }
         });
 
@@ -188,14 +174,24 @@ public class QuizActivityTenses extends AppCompatActivity {
             rightAnswers++;
         }
     }
+
     private class LoadQuestionsTask extends AsyncTask<Void, Void, List<QuestionsList>> {
 
         @Override
         protected List<QuestionsList> doInBackground(Void... voids) {
-            DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference().child("tenses");
+
+            question.setVisibility(View.GONE);
+            questions.setVisibility(View.GONE);
+            option1.setVisibility(View.GONE);
+            option2.setVisibility(View.GONE);
+            option3.setVisibility(View.GONE);
+            option4.setVisibility(View.GONE);
+            nextBtn.setVisibility(View.GONE);
+
+
+            DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference().child("tenses").child(getSelectedTopicName);
 
             final CountDownLatch latch = new CountDownLatch(1);
-            final List<QuestionsList> questionsLists = new ArrayList<>();
 
             firebaseDatabase.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -213,14 +209,11 @@ public class QuizActivityTenses extends AppCompatActivity {
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
                     questionsLists.add(new QuestionsList("q", "1", "2", "3", "4", "1"));
-
-                    // Release the latch to signal that the operation is complete
                     latch.countDown();
                 }
             });
 
             try {
-                // Wait for the Firebase operation to complete
                 latch.await();
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -231,6 +224,15 @@ public class QuizActivityTenses extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(List<QuestionsList> questionsLists) {
+            question.setVisibility(View.VISIBLE);
+            questions.setVisibility(View.VISIBLE);
+            option1.setVisibility(View.VISIBLE);
+            option2.setVisibility(View.VISIBLE);
+            option3.setVisibility(View.VISIBLE);
+            option4.setVisibility(View.VISIBLE);
+            nextBtn.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.GONE);
+
             questions.setText((curQuestPos + 1) + "/" + questionsLists.size());
             question.setText(questionsLists.get(0).getQuestion());
             option1.setText(questionsLists.get(0).getOption1());
@@ -240,11 +242,7 @@ public class QuizActivityTenses extends AppCompatActivity {
         }
     }
 
-    // Call this method to start the AsyncTask
     private void loadQuestions() {
         new LoadQuestionsTask().execute();
     }
-
-
 }
-//}
