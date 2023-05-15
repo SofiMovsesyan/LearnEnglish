@@ -31,7 +31,11 @@ public class QuestionsBankTenses {
             questionsList.add(question2);*//*
 
         DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference()
+<<<<<<< HEAD
                 .child("tenses");
+=======
+                .child("Tenses").child("A").child("Quiz").child("1");
+>>>>>>> parent of af98b35 (Firebase error1)
 
         firebaseDatabase.addValueEventListener(new ValueEventListener() {
             @Override

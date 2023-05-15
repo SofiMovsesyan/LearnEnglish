@@ -16,5 +16,8 @@
     <color name="my_pink">#F7C8E0</color>
     <color name="my_red">#FB5050</color>
     <color name="my_green">#62B865</color>
-
+    <color name="my_purple_dark">#ae8df2</color>
+    <color name="my_purple_middle">#c9a7eb</color>
+    <color name="my_purple_light">#ecc9ee</color>
+    <color name="my_bg">#f5f5f5</color>
 </resources>

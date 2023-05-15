@@ -28,6 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
     FirebaseUser mUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 //                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
             }
         });
@@ -65,19 +66,21 @@ public class RegisterActivity extends AppCompatActivity {
         String email = RegEmail.getText().toString();
         String password = RegPassword.getText().toString();
         String confirmPass = ConfPass.getText().toString();
-
-        if (!email.matches(emailPattern)) {
+        if (name.isEmpty()) {
+            RegName.setError("Enter Your Name");
+        }
+        else if (!email.matches(emailPattern)) {
             RegEmail.setError("Enter Correct Email");
             RegEmail.requestFocus();
-        }else if(password.isEmpty() || password.length()<8) {
-            RegPassword.setError("Enter Proper Password");
+        } else if (password.isEmpty() || password.length() < 8) {
+            RegPassword.setError("Password must be at least 8 letters");
             RegPassword.requestFocus();
 
-        }else if(!password.equals(confirmPass)) {
+        } else if (!password.equals(confirmPass)) {
             ConfPass.setError("Password not matched");
             ConfPass.requestFocus();
-        }else {
-            SharedPreferences sharedPreferences = getSharedPreferences(MainActivity.PREFS_NAME, 0);
+        } else {
+            SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
 
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean("hasLoggedIn", true);
@@ -95,10 +98,9 @@ public class RegisterActivity extends AppCompatActivity {
                                 progressDialog.dismiss();
                                 sendUserToNextActivity();
                                 Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-                            }
-                            else {
+                            } else {
                                 progressDialog.dismiss();
-                                Toast.makeText(RegisterActivity.this, ""+task.getException(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterActivity.this, "" + task.getException(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -107,7 +109,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void sendUserToNextActivity() {
         Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 }
