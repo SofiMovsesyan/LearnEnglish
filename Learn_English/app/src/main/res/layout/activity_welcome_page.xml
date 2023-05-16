@@ -22,7 +22,7 @@
         android:id="@+id/textView2"
         android:layout_width="404dp"
         android:layout_height="67dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="68dp"
         android:fontFamily="@font/polayfairdisplay_regular"
         android:text="Welcome Back!"
         android:textAlignment="center"

@@ -189,7 +189,7 @@ public class QuizActivityTenses extends AppCompatActivity {
             nextBtn.setVisibility(View.GONE);
 
 
-            DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference().child("tenses").child(getSelectedTopicName);
+            DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference().child("tenses").child("quiz").child(getSelectedTopicName);
 
             final CountDownLatch latch = new CountDownLatch(1);
 
