@@ -41,7 +41,6 @@ public class RegisterActivity extends AppCompatActivity {
         Regbtn = findViewById(R.id.Regbtn);
         progressDialog = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
-        mUser = mAuth.getCurrentUser();
 
         alrhaveacc.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,24 +89,54 @@ public class RegisterActivity extends AppCompatActivity {
             progressDialog.show();
 
             mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                            progressDialog.dismiss();
-                                            sendUserToNextActivity();
-                                            Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-                            } else {
-                                progressDialog.dismiss();
-                                Toast.makeText(RegisterActivity.this, "" + task.getException(), Toast.LENGTH_SHORT).show();
-                            }
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+//                            mUser.sendEmailVerification().addOnCompleteListener(task1 -> {
+//                                if (task.isSuccessful()) {
+//                                    progressDialog.dismiss();
+//                                    sendUserToNextActivity();
+//                                    Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+//                                } else {
+//                                    progressDialog.dismiss();
+//                                    Toast.makeText(RegisterActivity.this, "" + task.getException(), Toast.LENGTH_SHORT).show();
+//                                }
+//                            });
+                            sendVerificationEmail();
                         }
+                        else {
+                            Toast.makeText(this, "failed", Toast.LENGTH_SHORT).show();
+                        }
+
                     });
         }
     }
 
+    private void sendVerificationEmail() {
+        mUser = mAuth.getCurrentUser();
+
+        if (mUser != null) {
+            mUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                        // Verification email sent successfully
+                        Toast.makeText(RegisterActivity.this, "Verification email sent. Please check your email.", Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                                    sendUserToNextActivity();
+                                    Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        // Failed to send verification email
+                        Toast.makeText(RegisterActivity.this, "Failed to send verification email.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+    }
+
+
     private void sendUserToNextActivity() {
-        Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
+        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }

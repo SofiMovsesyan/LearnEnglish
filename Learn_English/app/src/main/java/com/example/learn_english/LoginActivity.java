@@ -103,14 +103,23 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
+                        if (mUser != null && mUser.isEmailVerified()) {
+                            SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
 
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putBoolean("hasLoggedIn", true);
-                        editor.commit();
-                        progressDialog.dismiss();
-                        sendUserToNextActivity();
-                        Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putBoolean("hasLoggedIn", true);
+                            editor.commit();
+                            progressDialog.dismiss();
+                            sendUserToNextActivity();
+                            Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            progressDialog.dismiss();
+                            err.setError("Verify your email");
+                            err.setFocusable(true);
+                            err.setFocusableInTouchMode(true);
+                            err.requestFocus();
+                        }
                     }
                     else {
                         progressDialog.dismiss();
