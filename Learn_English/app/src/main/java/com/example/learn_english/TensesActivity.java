@@ -6,17 +6,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
-import android.service.autofill.OnClickAction;
-import android.view.View;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class TensesActivity extends AppCompatActivity{
     ArrayList<TensesModel> tensesModels = new ArrayList<>();
-    CardView Tense;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +19,7 @@ public class TensesActivity extends AppCompatActivity{
         setContentView(R.layout.activity_tenses);
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         setUpTenses();
-        NRecyclerViewAdapter adapter = new NRecyclerViewAdapter(this, tensesModels);
+        TensesRecyclerViewAdapter adapter = new TensesRecyclerViewAdapter(this, tensesModels);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -42,7 +37,7 @@ public class TensesActivity extends AppCompatActivity{
     }
 
     private void setUpTenses() {
-        String[] nameOfTense = getResources().getStringArray(R.array.filters);
+        String[] nameOfTense = getResources().getStringArray(R.array.tenses);
         for (int i = 0; i < nameOfTense.length; i++) {
             tensesModels.add(new TensesModel(nameOfTense[i]));
         }

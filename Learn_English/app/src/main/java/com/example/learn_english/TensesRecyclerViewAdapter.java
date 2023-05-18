@@ -13,13 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class NRecyclerViewAdapter extends RecyclerView.Adapter<NRecyclerViewAdapter.MyViewHolder> {
+public class TensesRecyclerViewAdapter extends RecyclerView.Adapter<TensesRecyclerViewAdapter.MyViewHolder> {
     private String selectedTopicName = "";
     Context context;
     ArrayList<TensesModel> tensesModels;
 //    private final RecycleViewInterface recycleViewInterface;
 
-    public NRecyclerViewAdapter(Context context, ArrayList<TensesModel> tensesModels) {
+    public TensesRecyclerViewAdapter(Context context, ArrayList<TensesModel> tensesModels) {
         this.context = context;
         this.tensesModels = tensesModels;
 //        this.recycleViewInterface = recycleViewInterface;
@@ -27,14 +27,14 @@ public class NRecyclerViewAdapter extends RecyclerView.Adapter<NRecyclerViewAdap
 
     @NonNull
     @Override
-    public NRecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TensesRecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.tenses_recycler_view, parent, false);
+        View view = inflater.inflate(R.layout.recycler_view, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NRecyclerViewAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TensesRecyclerViewAdapter.MyViewHolder holder, int position) {
         holder.tenseName.setText(tensesModels.get(position).getTenseName());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,7 +66,7 @@ public class NRecyclerViewAdapter extends RecyclerView.Adapter<NRecyclerViewAdap
 
         public  MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            tenseName = itemView.findViewById(R.id.tenseName);
+            tenseName = itemView.findViewById(R.id.itemName);
 
 //            itemView.setOnClickListener(new View.OnClickListener(){
 //                @Override

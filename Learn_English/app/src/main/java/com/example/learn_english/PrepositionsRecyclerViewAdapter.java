@@ -1,0 +1,75 @@
+package com.example.learn_english;
+
+import android.content.Context;
+import android.content.Intent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+
+public class PrepositionsRecyclerViewAdapter extends RecyclerView.Adapter<PrepositionsRecyclerViewAdapter.MyViewHolder> {
+    private String selectedTopicName = "";
+    Context context;
+    ArrayList<PrepositionsModel> prepositionsModels;
+//    private final RecycleViewInterface recycleViewInterface;
+
+
+    public PrepositionsRecyclerViewAdapter(Context context, ArrayList<PrepositionsModel> prepositionsModels) {
+        this.context = context;
+        this.prepositionsModels = prepositionsModels;
+    }
+
+    @NonNull
+    @Override
+    public PrepositionsRecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.recycler_view, parent, false);
+        return new MyViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull PrepositionsRecyclerViewAdapter.MyViewHolder holder, int position) {
+        holder.prepName.setText(prepositionsModels.get(position).getPrepostionName());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, QuizActivityPrepositions.class);
+                intent.putExtra("selectedTopic",prepositionsModels.get(position).getPrepostionName());
+                Toast.makeText(context, intent.getStringExtra("selectedTopic"), Toast.LENGTH_SHORT).show();
+//                intent.putExtra("title", data.getTitle());
+//                intent.putExtra("description", data.getDescription());
+
+                context.startActivity(intent);
+            }
+        });
+    }
+
+    @Override
+    public int getItemCount() {
+        return prepositionsModels.size();
+    }
+
+//    @Override
+//    public void onItemClick(int position) {
+//
+//
+//    }
+
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView prepName;
+
+        public  MyViewHolder(@NonNull View itemView) {
+            super(itemView);
+            prepName = itemView.findViewById(R.id.itemName);
+
+
+        }
+
+    }
+}

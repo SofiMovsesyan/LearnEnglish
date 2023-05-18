@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
-public class QuizActivityTenses extends AppCompatActivity {
+public class QuizActivityPrepositions extends AppCompatActivity {
     private TextView questions, question;
     private ProgressBar progressBar;
     private AppCompatButton option1, option2, option3, option4, nextBtn;
@@ -33,7 +33,6 @@ public class QuizActivityTenses extends AppCompatActivity {
 
     private int curQuestPos = 0;
     private String selectedOptionByUser = "";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,7 +89,7 @@ public class QuizActivityTenses extends AppCompatActivity {
 
         nextBtn.setOnClickListener(v -> {
             if (selectedOptionByUser.isEmpty()) {
-                Toast.makeText(QuizActivityTenses.this, "Pls select an option", Toast.LENGTH_SHORT).show();
+                Toast.makeText(QuizActivityPrepositions.this, "Pls select an option", Toast.LENGTH_SHORT).show();
             } else {
                 changeNextQuestion();
             }
@@ -144,7 +143,7 @@ public class QuizActivityTenses extends AppCompatActivity {
     }
 
     private void ForRes() {
-        Intent intent = new Intent(QuizActivityTenses.this, QuizResults.class);
+        Intent intent = new Intent(QuizActivityPrepositions.this, QuizResults.class);
         intent.putExtra("correct", rightAnswers);
 //            intent.putExtra("incorrect", getInCorrectAnswers());
         startActivity(intent);
@@ -189,7 +188,7 @@ public class QuizActivityTenses extends AppCompatActivity {
             nextBtn.setVisibility(View.GONE);
 
 
-            DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference().child("tenses").child("quiz").child(getSelectedTopicName);
+            DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference().child("prepositions").child("quiz").child(getSelectedTopicName);
 
             final CountDownLatch latch = new CountDownLatch(1);
             firebaseDatabase.addValueEventListener(new ValueEventListener() {

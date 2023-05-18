@@ -68,8 +68,7 @@ public class RegisterActivity extends AppCompatActivity {
         String confirmPass = ConfPass.getText().toString();
         if (name.isEmpty()) {
             RegName.setError("Enter Your Name");
-        }
-        else if (!email.matches(emailPattern)) {
+        } else if (!email.matches(emailPattern)) {
             RegEmail.setError("Enter Correct Email");
             RegEmail.requestFocus();
         } else if (password.isEmpty() || password.length() < 8) {
@@ -95,9 +94,18 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                progressDialog.dismiss();
-                                sendUserToNextActivity();
-                                Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                                mUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            progressDialog.dismiss();
+                                            sendUserToNextActivity();
+                                            Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+//
+
                             } else {
                                 progressDialog.dismiss();
                                 Toast.makeText(RegisterActivity.this, "" + task.getException(), Toast.LENGTH_SHORT).show();

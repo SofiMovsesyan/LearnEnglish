@@ -32,7 +32,6 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView2" />
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -49,7 +48,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/tenses"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="70dp"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="50dp"
@@ -65,7 +64,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/words"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="70dp"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="50dp"
             android:layout_marginRight="50dp"
@@ -82,7 +81,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/prepositions"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="70dp"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="50dp"
             android:layout_marginRight="50dp"
