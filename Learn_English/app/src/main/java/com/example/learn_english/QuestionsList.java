@@ -1,7 +1,7 @@
 package com.example.learn_english;
 
 public class QuestionsList {
-    private String question, option1, option2, option3, option4, answer;
+    private String question, option1, option2, option3, option4, answer, userSelected;
 
     public QuestionsList(String question, String option1, String option2, String option3, String option4,
                          String answer) {
@@ -38,5 +38,13 @@ public class QuestionsList {
     }
 
     public QuestionsList() {
+    }
+
+    public void setUserSelected(String userSelected) {
+        this.userSelected = userSelected;
+    }
+
+    public String getUserSelected() {
+        return userSelected;
     }
 }

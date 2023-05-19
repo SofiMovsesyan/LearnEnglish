@@ -7,19 +7,32 @@ import android.os.Bundle;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class QuizResults extends AppCompatActivity {
-TextView correct, incorrect;
-String crc;
-ProgressBar progressBar;
+    TextView correct, incorrect;
+    String crc;
+    ProgressBar progressBar;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_results);
+
         correct = findViewById(R.id.correct);
-        crc = getIntent().getStringExtra("correct");
         incorrect = findViewById(R.id.incorrect);
-        incorrect.setText(getIntent().getStringExtra("correct"));
         progressBar = findViewById(R.id.progressBar);
-        progressBar.setProgress(25);
+
+        int correctAnswers = getIntent().getIntExtra("correct", 0);
+        int incorrectAnswers = getIntent().getIntExtra("incorrect", 0);
+
+        correct.setText("You answered " + correctAnswers + "correct");
+        incorrect.setText("You answered " + incorrectAnswers + "incorrect");
+
+        int totalQuestions = getIntent().getIntExtra("size", 0); // Replace questionsLists with your actual list name
+        int progressPercentage = (int) ((correctAnswers / (float) totalQuestions) * 100);
+        progressBar.setProgress(progressPercentage);
     }
 }

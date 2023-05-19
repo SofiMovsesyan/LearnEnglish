@@ -105,7 +105,6 @@ public class LoginActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         if (mUser != null && mUser.isEmailVerified()) {
                             SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
-
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putBoolean("hasLoggedIn", true);
                             editor.commit();

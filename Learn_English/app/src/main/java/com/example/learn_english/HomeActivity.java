@@ -14,7 +14,7 @@ import com.google.firebase.ktx.Firebase;
 
 public class HomeActivity extends AppCompatActivity {
     Button button;
-    AppCompatButton tenses, prepositions;
+    AppCompatButton tenses, prepositions, words;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -59,6 +60,8 @@ public class QuizActivityTenses extends AppCompatActivity {
                 option1.setBackgroundResource(R.drawable.rounded_borderes_wrong);
                 option1.setTextColor(Color.WHITE);
                 revealAnswer();
+                questionsLists.get(curQuestPos).setUserSelected(selectedOptionByUser);
+
             }
         });
 
@@ -68,6 +71,8 @@ public class QuizActivityTenses extends AppCompatActivity {
                 option2.setBackgroundResource(R.drawable.rounded_borderes_wrong);
                 option2.setTextColor(Color.WHITE);
                 revealAnswer();
+                questionsLists.get(curQuestPos).setUserSelected(selectedOptionByUser);
+
             }
         });
         option3.setOnClickListener(v -> {
@@ -76,6 +81,8 @@ public class QuizActivityTenses extends AppCompatActivity {
                 option3.setBackgroundResource(R.drawable.rounded_borderes_wrong);
                 option3.setTextColor(Color.WHITE);
                 revealAnswer();
+                questionsLists.get(curQuestPos).setUserSelected(selectedOptionByUser);
+
             }
         });
 
@@ -85,6 +92,8 @@ public class QuizActivityTenses extends AppCompatActivity {
                 option4.setBackgroundResource(R.drawable.rounded_borderes_wrong);
                 option4.setTextColor(Color.WHITE);
                 revealAnswer();
+                questionsLists.get(curQuestPos).setUserSelected(selectedOptionByUser);
+
             }
         });
 
@@ -145,14 +154,39 @@ public class QuizActivityTenses extends AppCompatActivity {
 
     private void ForRes() {
         Intent intent = new Intent(QuizActivityTenses.this, QuizResults.class);
-        intent.putExtra("correct", rightAnswers);
-//            intent.putExtra("incorrect", getInCorrectAnswers());
+        intent.putExtra("correct", getCorrectAnswers());
+        intent.putExtra("incorrect", getInCorrectAnswers());
+        intent.putExtra("size", questionsLists.size());
         startActivity(intent);
         finish();
 
 
     }
 
+    private int getCorrectAnswers() {
+        int correctAnswers = 0;
+        for (int i = 0; i < questionsLists.size(); i++) {
+            final String getUserSelectedAnswer = questionsLists.get(i).getUserSelected();
+            final String getAnswer = questionsLists.get(i).getAnswer();
+            if (getUserSelectedAnswer.equals(getAnswer)) {
+                correctAnswers++;
+            }
+        }
+        return correctAnswers;
+    }
+
+    private int getInCorrectAnswers() {
+        int correctAnswers = 0;
+        for (int i = 0; i < questionsLists.size(); i++) {
+            final String getUserSelectedAnswer = questionsLists.get(i).getUserSelected();
+            final String getAnswer = questionsLists.get(i).getAnswer();
+            if (!getUserSelectedAnswer.equals(getAnswer)) {
+                correctAnswers++;
+                Log.i("correct", "" + correctAnswers);
+            }
+        }
+        return correctAnswers;
+    }
 
     private void revealAnswer() {
         final String getAnswer = questionsLists.get(curQuestPos).getAnswer();
