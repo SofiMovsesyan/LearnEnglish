@@ -25,7 +25,6 @@ public class HomeActivity extends AppCompatActivity {
         tenses.setOnClickListener(v -> {
             Intent intent = new Intent(HomeActivity.this, TensesActivity.class);
             startActivity(intent);
-            finish();
         });
 
         prepositions = findViewById(R.id.prepositions);
@@ -33,7 +32,12 @@ public class HomeActivity extends AppCompatActivity {
         prepositions.setOnClickListener(v -> {
             Intent intent = new Intent(HomeActivity.this, PrepositionsActivity.class);
             startActivity(intent);
-            finish();
+        });
+
+        words = findViewById(R.id.words);
+        words.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, WordsActivity.class);
+            startActivity(intent);
         });
         /* Log out */
         button = findViewById(R.id.button);

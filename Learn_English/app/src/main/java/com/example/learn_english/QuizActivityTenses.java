@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
@@ -233,7 +234,9 @@ public class QuizActivityTenses extends AppCompatActivity {
                     for (DataSnapshot child : snapshot.getChildren()) {
                         QuestionsList questionsList1 = child.getValue(QuestionsList.class);
                         if (questionsList1 != null) {
-                            questionsLists.add(questionsList1);
+                            if (questionsLists.size()!=10) {
+                                questionsLists.add(questionsList1);
+                            }
                         }
                     }
                     latch.countDown();
@@ -257,23 +260,43 @@ public class QuizActivityTenses extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(List<QuestionsList> questionsLists) {
-            question.setVisibility(View.VISIBLE);
-            questions.setVisibility(View.VISIBLE);
-            option1.setVisibility(View.VISIBLE);
-            option2.setVisibility(View.VISIBLE);
-            option3.setVisibility(View.VISIBLE);
-            option4.setVisibility(View.VISIBLE);
-            nextBtn.setVisibility(View.VISIBLE);
-            progressBar.setVisibility(View.GONE);
+                    // Shuffle the questions and options
+                    Collections.shuffle(questionsLists);
 
-            questions.setText((curQuestPos + 1) + "/" + questionsLists.size());
-            question.setText(questionsLists.get(0).getQuestion());
-            option1.setText(questionsLists.get(0).getOption1());
-            option2.setText(questionsLists.get(0).getOption2());
-            option3.setText(questionsLists.get(0).getOption3());
-            option4.setText(questionsLists.get(0).getOption4());
-        }
-    }
+                    for (QuestionsList question : questionsLists) {
+                        List<String> options = new ArrayList<>();
+                        options.add(question.getOption1());
+                        options.add(question.getOption2());
+                        options.add(question.getOption3());
+                        options.add(question.getOption4());
+
+                        // Shuffle the options
+                        Collections.shuffle(options);
+
+                        question.setOption1(options.get(0));
+                        question.setOption2(options.get(1));
+                        question.setOption3(options.get(2));
+                        question.setOption4(options.get(3));
+                    }
+
+                    question.setVisibility(View.VISIBLE);
+                    questions.setVisibility(View.VISIBLE);
+                    option1.setVisibility(View.VISIBLE);
+                    option2.setVisibility(View.VISIBLE);
+                    option3.setVisibility(View.VISIBLE);
+                    option4.setVisibility(View.VISIBLE);
+                    nextBtn.setVisibility(View.VISIBLE);
+                    progressBar.setVisibility(View.GONE);
+
+                    questions.setText((curQuestPos + 1) + "/" + questionsLists.size());
+                    question.setText(questionsLists.get(0).getQuestion());
+                    option1.setText(questionsLists.get(0).getOption1());
+                    option2.setText(questionsLists.get(0).getOption2());
+                    option3.setText(questionsLists.get(0).getOption3());
+                    option4.setText(questionsLists.get(0).getOption4());
+                }
+            }
+
 
     private void loadQuestions() {
         new LoadQuestionsTask().execute();

@@ -43,7 +43,6 @@ public class LoginActivity extends AppCompatActivity {
         Loginbtn = findViewById(R.id.Loginbtn);
         progressDialog = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
-        mUser = mAuth.getCurrentUser();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -81,57 +80,110 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void LoginUser() {
-        String email = LogEmail.getText().toString();
-        String password = LogPassword.getText().toString();
+//    private void LoginUser() {
+//        String email = LogEmail.getText().toString();
+//        String password = LogPassword.getText().toString();
+//
+//        if (!email.matches(emailPattern)) {
+//            LogEmail.setError("Enter Correct Email");
+//            LogEmail.requestFocus();
+//        } else if (password.isEmpty() || password.length() < 8 ) {
+//            LogPassword.setError("Enter Proper Password");
+//            LogPassword.requestFocus();
+//
+//        } else {
+//
+//            progressDialog.setMessage("Please Wait While Login...");
+//            progressDialog.setTitle("Login");
+//            progressDialog.setCanceledOnTouchOutside(false);
+//            progressDialog.show();
+//
+//            mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//                @Override
+//                public void onComplete(@NonNull Task<AuthResult> task) {
+//                    if (task.isSuccessful()) {
+//                        mUser = mAuth.getCurrentUser();
+//
+//                        if (mUser != null ) {
+//                            if(mUser.isEmailVerified()){
+//                                SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
+//                                SharedPreferences.Editor editor = sharedPreferences.edit();
+//                                editor.putBoolean("hasLoggedIn", true);
+//                                editor.commit();
+//                                progressDialog.dismiss();
+//                                sendUserToNextActivity();
+//                                Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+//                            }}
+//                        else {
+//                            progressDialog.dismiss();
+//                            err.setError("Verify your email");
+//                            err.setFocusable(true);
+//                            err.setFocusableInTouchMode(true);
+//                            err.requestFocus();
+//                        }
+//                    }
+//                    else {
+//                        progressDialog.dismiss();
+//                        err.setError("Your password or Email is wrong");
+//                        err.setFocusable(true);
+//                        err.setFocusableInTouchMode(true);
+//                        err.requestFocus();
+//                        Toast.makeText(LoginActivity.this, ""+task.getException(), Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            });
+//        }
+//    }
+private void LoginUser() {
+    String email = LogEmail.getText().toString();
+    String password = LogPassword.getText().toString();
 
-        if (!email.matches(emailPattern)) {
-            LogEmail.setError("Enter Correct Email");
-            LogEmail.requestFocus();
-        } else if (password.isEmpty() || password.length() < 8 ) {
-            LogPassword.setError("Enter Proper Password");
-            LogPassword.requestFocus();
+    if (!email.matches(emailPattern)) {
+        LogEmail.setError("Enter Correct Email");
+        LogEmail.requestFocus();
+    } else if (password.isEmpty() || password.length() < 8) {
+        LogPassword.setError("Enter Proper Password");
+        LogPassword.requestFocus();
+    } else {
+        progressDialog.setMessage("Please Wait While Login...");
+        progressDialog.setTitle("Login");
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
 
-        } else {
-
-            progressDialog.setMessage("Please Wait While Login...");
-            progressDialog.setTitle("Login");
-            progressDialog.setCanceledOnTouchOutside(false);
-            progressDialog.show();
-
-            mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        if (mUser != null && mUser.isEmailVerified()) {
-                            SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putBoolean("hasLoggedIn", true);
-                            editor.commit();
-                            progressDialog.dismiss();
-                            sendUserToNextActivity();
-                            Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                        }
-                        else {
-                            progressDialog.dismiss();
-                            err.setError("Verify your email");
-                            err.setFocusable(true);
-                            err.setFocusableInTouchMode(true);
-                            err.requestFocus();
-                        }
-                    }
-                    else {
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                mUser = mAuth.getCurrentUser();
+                if (mUser != null) {
+                    if (mUser.isEmailVerified()) {
+                        SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean("hasLoggedIn", true);
+                        editor.apply();
                         progressDialog.dismiss();
-                        err.setError("Your password or Email is wrong");
+                        sendUserToNextActivity();
+                        Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                    } else {
+                        progressDialog.dismiss();
+                        err.setError("Verify your email");
                         err.setFocusable(true);
                         err.setFocusableInTouchMode(true);
                         err.requestFocus();
-                        Toast.makeText(LoginActivity.this, ""+task.getException(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Email not verified", Toast.LENGTH_SHORT).show();
+                        mAuth.signOut();
                     }
                 }
-            });
-        }
+            } else {
+                progressDialog.dismiss();
+                err.setError("Your password or Email is wrong");
+                err.setFocusable(true);
+                err.setFocusableInTouchMode(true);
+                err.requestFocus();
+                Toast.makeText(LoginActivity.this, "Login Failed: " + task.getException(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+}
+
     private void sendUserToNextActivity() {
         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);

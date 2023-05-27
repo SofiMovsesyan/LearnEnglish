@@ -18,6 +18,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
     TextView alrhaveacc;
@@ -61,28 +63,22 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void CreateAuth() {
         String name = RegName.getText().toString();
-
         String email = RegEmail.getText().toString();
         String password = RegPassword.getText().toString();
         String confirmPass = ConfPass.getText().toString();
+
         if (name.isEmpty()) {
             RegName.setError("Enter Your Name");
         } else if (!email.matches(emailPattern)) {
             RegEmail.setError("Enter Correct Email");
             RegEmail.requestFocus();
         } else if (password.isEmpty() || password.length() < 8) {
-            RegPassword.setError("Password must be at least 8 letters");
+            RegPassword.setError("Password must be at least 8 characters");
             RegPassword.requestFocus();
-
         } else if (!password.equals(confirmPass)) {
             ConfPass.setError("Password not matched");
             ConfPass.requestFocus();
         } else {
-            SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
-
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putBoolean("hasLoggedIn", true);
-            editor.commit();
             progressDialog.setMessage("Please Wait While Registration...");
             progressDialog.setTitle("Registration");
             progressDialog.setCanceledOnTouchOutside(false);
@@ -91,25 +87,15 @@ public class RegisterActivity extends AppCompatActivity {
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-//                            mUser.sendEmailVerification().addOnCompleteListener(task1 -> {
-//                                if (task.isSuccessful()) {
-//                                    progressDialog.dismiss();
-//                                    sendUserToNextActivity();
-//                                    Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-//                                } else {
-//                                    progressDialog.dismiss();
-//                                    Toast.makeText(RegisterActivity.this, "" + task.getException(), Toast.LENGTH_SHORT).show();
-//                                }
-//                            });
                             sendVerificationEmail();
+                        } else {
+                            progressDialog.dismiss();
+                            Toast.makeText(RegisterActivity.this, "Registration Failed: " + task.getException(), Toast.LENGTH_SHORT).show();
                         }
-                        else {
-                            Toast.makeText(this, "failed", Toast.LENGTH_SHORT).show();
-                        }
-
                     });
         }
     }
+
 
     private void sendVerificationEmail() {
         mUser = mAuth.getCurrentUser();
@@ -119,20 +105,29 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
-                        // Verification email sent successfully
-                        Toast.makeText(RegisterActivity.this, "Verification email sent. Please check your email.", Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
-                                    sendUserToNextActivity();
-                                    Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                        String userId = mUser.getUid();
+                        String email = mUser.getEmail();
 
+                        // Create a User object
+                        User user = new User(userId, email);
+
+                        // Store the user in Firebase Realtime Database
+                        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
+                        usersRef.child(userId).setValue(user);
+
+                        sendUserToNextActivity();
                     } else {
                         // Failed to send verification email
                         Toast.makeText(RegisterActivity.this, "Failed to send verification email.", Toast.LENGTH_SHORT).show();
                     }
+                    sendUserToNextActivity();
+
                 }
             });
         }
     }
+
+
 
 
     private void sendUserToNextActivity() {

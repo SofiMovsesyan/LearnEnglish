@@ -6,7 +6,6 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-
         android:icon="@drawable/myappicon"
         android:label="@string/app_name"
         android:roundIcon="@drawable/myappicon"
@@ -14,13 +13,22 @@
         android:theme="@style/Theme.Learn_English"
         tools:targetApi="31">
         <activity
+            android:name=".LearnActivity"
+            android:exported="false" />
+        <activity
+            android:name=".QuizActivityWords"
+            android:exported="false" />
+        <activity
+            android:name=".WordsActivity"
+            android:exported="false" />
+        <activity
             android:name=".QuizActivityPrepositions"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".PrepositionsActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".QuizResults"
             android:exported="false"

@@ -9,25 +9,45 @@
         <item>Past Continuous</item>
         <item>Past Perfect</item>
         <item>Past Perfect Continuous</item>
+
         <item>Future Simple</item>
         <item>Future Continuous</item>
         <item>Future Perfect</item>
-        <item>Future Perfect Continuous</item>
+        <item> Future Perfect Continuous</item>
 
 
     </string-array>
 
     <string-array name="prepositions">
+        <item>Prepositions of Time</item>
+
         <item>Simple Preposition</item>
         <item>Double Preposition</item>
         <item>Compound Preposition</item>
         <item>Participle Preposition</item>
         <item>Disguised Preposition</item>
         <item>Detached Preposition</item>
-        <item>Prepositions of Time</item>
         <item>Prepositions of Place and Direction</item>
         <item>Prepositions of Agents or Things</item>
         <item>Phrasal Prepositions</item>
+
+    </string-array>
+
+    <string-array name="words">
+        <item>Animals</item>
+        <item>Clothes and Accessories</item>
+        <item>Communications and Technology</item>
+        <item>Education</item>
+        <item>Entertainment and Media</item>
+        <item>Food and Drink</item>
+        <item>Health, Medicine and Exercise</item>
+        <item>Hobbies and Leisure</item>
+        <item>House and Home</item>
+        <item>Personal Feelings, Opinions and Experiences (Adjectives)</item>
+        <item>Places: Buildings</item>
+        <item>Services</item>
+        <item>Sport</item>
+        <item>Weather</item>
 
     </string-array>
 </resources>
