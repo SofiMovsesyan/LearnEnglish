@@ -111,7 +111,7 @@ public class RegisterActivity extends AppCompatActivity {
                         // Create a User object
                         User user = new User(userId, email);
 
-                        Tenses tenses = new Tenses(0, 0); // Assuming default progress keys are 0
+                        Tenses tenses = new Tenses(0, 0, 0,0,0,0,0,0,0,0,0,0); // Assuming default progress keys are 0
 
 // Add the tenses object to the user
                         user.setTenses(tenses);

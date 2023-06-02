@@ -64,6 +64,7 @@ public class QuizResults extends AppCompatActivity {
     TextView incorrect;
     ProgressBar progressBar;
     TensesRecyclerViewAdapter adapter;
+    private String getSelectedTopicName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +74,9 @@ public class QuizResults extends AppCompatActivity {
         correct = findViewById(R.id.correct);
         incorrect = findViewById(R.id.incorrect);
         progressBar = findViewById(R.id.progressBar);
+        getSelectedTopicName = getIntent().getStringExtra("selectedTopicName");
 
+        getSelectedTopicName = getSelectedTopicName.replace(" ", "");
         int correctAnswers = getIntent().getIntExtra("correct", 0);
         int incorrectAnswers = getIntent().getIntExtra("incorrect", 0);
 
@@ -91,7 +94,7 @@ public class QuizResults extends AppCompatActivity {
 
 // Create a HashMap to store the tenses values
         HashMap<String, Object> tensesMap = new HashMap<>();
-        tensesMap.put("presentSimpleProgress", progressPercentage);
+        tensesMap.put(getSelectedTopicName, progressPercentage);
 
 // Update the tenses values in the Firebase Realtime Database
         tensesRef.updateChildren(tensesMap);

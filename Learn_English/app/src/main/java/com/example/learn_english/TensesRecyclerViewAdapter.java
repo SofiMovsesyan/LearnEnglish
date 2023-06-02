@@ -345,7 +345,7 @@ public class TensesRecyclerViewAdapter extends RecyclerView.Adapter<TensesRecycl
     private UserData getUserData(int position, MyViewHolder holder) {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users")
-                .child(userId).child("tenses").child("presentSimpleProgress");
+                .child(userId).child("tenses").child(tensesModels.get(position).getTenseName().replace(" ", ""));
 
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

@@ -157,6 +157,7 @@ public class QuizActivityTenses extends AppCompatActivity {
         Intent intent = new Intent(QuizActivityTenses.this, QuizResults.class);
         intent.putExtra("correct", getCorrectAnswers());
         intent.putExtra("incorrect", getInCorrectAnswers());
+        intent.putExtra("selectedTopicName", getSelectedTopicName);
         intent.putExtra("size", questionsLists.size());
         startActivity(intent);
         finish();
