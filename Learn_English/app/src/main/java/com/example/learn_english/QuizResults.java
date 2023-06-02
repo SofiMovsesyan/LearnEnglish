@@ -9,7 +9,12 @@ import android.os.Bundle;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /*
@@ -77,19 +82,33 @@ public class QuizResults extends AppCompatActivity {
 
         int totalQuestions = getIntent().getIntExtra("size", 0);
         int progressPercentage = (int) ((correctAnswers / (float) totalQuestions) * 100);
+
+        // Get the current user's ID
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+// Get a reference to the user's tenses node in the Firebase Realtime Database
+        DatabaseReference tensesRef = FirebaseDatabase.getInstance().getReference("users").child(userId).child("tenses");
+
+// Create a HashMap to store the tenses values
+        HashMap<String, Object> tensesMap = new HashMap<>();
+        tensesMap.put("presentSimpleProgress", progressPercentage);
+
+// Update the tenses values in the Firebase Realtime Database
+        tensesRef.updateChildren(tensesMap);
+
         progressBar.setProgress(progressPercentage);
 
-        int itemPosition = getIntent().getIntExtra("itemPosition", -1);
-        int progress = progressPercentage;
-
-        if (adapter != null) {
-            adapter.updateProgress(itemPosition, progress);
-        }
-
-        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt("progress", progress);
-        editor.apply();
+//        int itemPosition = getIntent().getIntExtra("itemPosition", -1);
+//        int progress = progressPercentage;
+//
+//        if (adapter != null) {
+//            adapter.updateProgress(itemPosition, progress);
+//        }
+//
+//        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        editor.putInt("progress", progress);
+//        editor.apply();
     }
 }
 
