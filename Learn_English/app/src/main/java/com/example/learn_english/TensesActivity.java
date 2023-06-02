@@ -70,7 +70,7 @@ public class TensesActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         progress = sharedPreferences.getInt("progress", 0);
-
+//
         int itemPosition = getIntent().getIntExtra("itemPosition", -1);
         int quizProgress = getIntent().getIntExtra("quizProgress", 0);
 
@@ -85,7 +85,7 @@ public class TensesActivity extends AppCompatActivity {
     private void setUpTenses() {
         String[] nameOfTense = getResources().getStringArray(R.array.tenses);
         for (int i = 0; i < nameOfTense.length; i++) {
-            tensesModels.add(new TensesModel(nameOfTense[i], 0));
+            tensesModels.add(new TensesModel(nameOfTense[i], progress));
         }
     }
 }

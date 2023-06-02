@@ -35,7 +35,6 @@ public class QuizActivityTenses extends AppCompatActivity {
 
     private int curQuestPos = 0;
     private String selectedOptionByUser = "";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

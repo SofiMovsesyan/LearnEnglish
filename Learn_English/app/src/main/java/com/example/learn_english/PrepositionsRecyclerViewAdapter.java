@@ -2,23 +2,30 @@ package com.example.learn_english;
 
 import android.content.Context;
 import android.content.Intent;
+import android.service.autofill.UserData;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 public class PrepositionsRecyclerViewAdapter extends RecyclerView.Adapter<PrepositionsRecyclerViewAdapter.MyViewHolder> {
-    private String selectedTopicName = "";
-    Context context;
-    ArrayList<PrepositionsModel> prepositionsModels;
-//    private final RecycleViewInterface recycleViewInterface;
-
+    private Context context;
+    private ArrayList<PrepositionsModel> prepositionsModels;
 
     public PrepositionsRecyclerViewAdapter(Context context, ArrayList<PrepositionsModel> prepositionsModels) {
         this.context = context;
@@ -35,19 +42,62 @@ public class PrepositionsRecyclerViewAdapter extends RecyclerView.Adapter<Prepos
 
     @Override
     public void onBindViewHolder(@NonNull PrepositionsRecyclerViewAdapter.MyViewHolder holder, int position) {
-        holder.prepName.setText(prepositionsModels.get(position).getPrepostionName());
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        PrepositionsModel prepositionsModel = prepositionsModels.get(position);
+        holder.prepositionName.setText(prepositionsModel.getPrepostionName());
+//        int progress = getUserProgressForItem(position);
+//
+//        // Update the progress bar for the item
+//        holder.progressBar.setProgress(progress);
+        holder.ll2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                getUserData(position, holder);
                 Intent intent = new Intent(context, QuizActivityPrepositions.class);
-                intent.putExtra("selectedTopic",prepositionsModels.get(position).getPrepostionName());
-                Toast.makeText(context, intent.getStringExtra("selectedTopic"), Toast.LENGTH_SHORT).show();
-//                intent.putExtra("title", data.getTitle());
-//                intent.putExtra("description", data.getDescription());
-
+                intent.putExtra("selectedTopic", prepositionsModels.get(position).getPrepostionName());
                 context.startActivity(intent);
             }
         });
+
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getUserData(position, holder);
+                Intent intent = new Intent(context, LearnActivity.class);
+                intent.putExtra("selectedTopic", prepositionsModels.get(position).getPrepostionName());
+                context.startActivity(intent);
+            }
+        });
+    }
+
+
+
+    private UserData getUserData(int position, MyViewHolder holder) {
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users")
+                .child(userId).child("prepositions").child(prepositionsModels.get(position).getPrepostionName().replace(" ", ""));
+
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    int presentSimpleProgress = snapshot.getValue(Integer.class);
+                    updateProgressBar(position, presentSimpleProgress, holder);
+                } else {
+                    // Handle the case where the presentSimpleProgress value doesn't exist
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle the error case
+            }
+        });
+        return null;
+    }
+
+    private void updateProgressBar(int position, int progress, MyViewHolder holder) {
+        prepositionsModels.get(position).setProgress(progress);
+        holder.progressBar.setProgress(progress);
     }
 
     @Override
@@ -55,21 +105,18 @@ public class PrepositionsRecyclerViewAdapter extends RecyclerView.Adapter<Prepos
         return prepositionsModels.size();
     }
 
-//    @Override
-//    public void onItemClick(int position) {
-//
-//
-//    }
-
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView prepName;
+        ProgressBar progressBar;
+        TextView prepositionName;
+        View imageView;
+        LinearLayout ll2;
 
-        public  MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            prepName = itemView.findViewById(R.id.itemName);
-
-
+            prepositionName = itemView.findViewById(R.id.itemName);
+            imageView = itemView.findViewById(R.id.imageView3);
+            ll2 = itemView.findViewById(R.id.linearLayout2);
+            progressBar = itemView.findViewById(R.id.progressBar3);
         }
-
     }
 }

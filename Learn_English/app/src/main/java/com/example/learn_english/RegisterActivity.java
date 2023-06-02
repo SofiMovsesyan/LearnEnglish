@@ -112,9 +112,10 @@ public class RegisterActivity extends AppCompatActivity {
                         User user = new User(userId, email);
 
                         Tenses tenses = new Tenses(0, 0, 0,0,0,0,0,0,0,0,0,0); // Assuming default progress keys are 0
-
+                        Prepositions prepositions = new Prepositions(0,0,0,0,0,0,0,0,0,0);
 // Add the tenses object to the user
                         user.setTenses(tenses);
+                        user.setPrepositions(prepositions);
                         // Store the user in Firebase Realtime Database
                         DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
                         usersRef.child(userId).setValue(user);

@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -63,7 +64,6 @@ public class QuizResults extends AppCompatActivity {
     TextView correct;
     TextView incorrect;
     ProgressBar progressBar;
-    TensesRecyclerViewAdapter adapter;
     private String getSelectedTopicName;
 
     @Override
@@ -76,6 +76,7 @@ public class QuizResults extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
         getSelectedTopicName = getIntent().getStringExtra("selectedTopicName");
 
+        Toast.makeText(this, "" + getSelectedTopicName, Toast.LENGTH_SHORT).show();
         getSelectedTopicName = getSelectedTopicName.replace(" ", "");
         int correctAnswers = getIntent().getIntExtra("correct", 0);
         int incorrectAnswers = getIntent().getIntExtra("incorrect", 0);
@@ -89,16 +90,33 @@ public class QuizResults extends AppCompatActivity {
         // Get the current user's ID
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+
 // Get a reference to the user's tenses node in the Firebase Realtime Database
-        DatabaseReference tensesRef = FirebaseDatabase.getInstance().getReference("users").child(userId).child("tenses");
+        if (getSelectedTopicName.equals("PresentSimple") || getSelectedTopicName.equals("PresentContinuous") ||
+        getSelectedTopicName.equals("PresentPerfect")|| getSelectedTopicName.equals("PresentPerfectContinuous")||
+        getSelectedTopicName.equals("PastSimple") || getSelectedTopicName.equals("PastContinuous") ||
+        getSelectedTopicName.equals("PastPerfect")  || getSelectedTopicName.equals("PastPerfectContinuous") ||
+        getSelectedTopicName.equals("FutureSimple") || getSelectedTopicName.equals("FutureContinuous") ||
+        getSelectedTopicName.equals("FuturePerfect") || getSelectedTopicName.equals("FuturePerfectContinuous")) {
+            DatabaseReference tensesRef = FirebaseDatabase.getInstance().getReference("users").child(userId).child("tenses");
 
 // Create a HashMap to store the tenses values
-        HashMap<String, Object> tensesMap = new HashMap<>();
-        tensesMap.put(getSelectedTopicName, progressPercentage);
+            HashMap<String, Object> tensesMap = new HashMap<>();
+            tensesMap.put(getSelectedTopicName, progressPercentage);
 
 // Update the tenses values in the Firebase Realtime Database
-        tensesRef.updateChildren(tensesMap);
+            tensesRef.updateChildren(tensesMap);
+        }else {
+            Toast.makeText(this, "else", Toast.LENGTH_SHORT).show();
+            DatabaseReference prepRef = FirebaseDatabase.getInstance().getReference("users").child(userId).child("prepositions");
 
+// Create a HashMap to store the tenses values
+            HashMap<String, Object> prepMap = new HashMap<>();
+            prepMap.put(getSelectedTopicName, progressPercentage);
+
+// Update the tenses values in the Firebase Realtime Database
+            prepRef.updateChildren(prepMap);
+        }
         progressBar.setProgress(progressPercentage);
 
 //        int itemPosition = getIntent().getIntExtra("itemPosition", -1);
