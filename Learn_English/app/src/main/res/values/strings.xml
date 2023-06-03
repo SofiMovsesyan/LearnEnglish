@@ -14,7 +14,6 @@
         <item>Future Perfect</item>
         <item> Future Perfect Continuous</item>
 
-
     </string-array>
 
     <string-array name="prepositions">
@@ -49,4 +48,26 @@
         <item>Weather</item>
 
     </string-array>
+    <string name="PresentSimple">The simple present is a verb tense with two main uses. We use the simple present tense when an action is happening right now, or when it happens regularly (or unceasingly, which is why it’s sometimes called present indefinite). Depending on the person, the simple present tense is formed by using the root form or by adding s or es to the end.
+\n Example: I feel great! Pauline loves pie. I’m sorry to hear that you’re sick.\n
+The other is to talk about habitual actions or occurrences.\n
+Example: Pauline practices the piano every day. Ms. Jackson travels during the summer. Hamsters run all night.\n
+Typically, when we want to describe a temporary action that is currently in progress, we use the present continuous: Pauline can’t come to the phone right now because she is brushing her teeth.
+\n\nHow to make the simple present negative\n\n
+The formula for making a simple present verb negative is do/does + not + [root form of verb]. You can also use the contraction don’t or doesn’t instead of do not or does not.
+\n
+Example: Pauline does not want to share the pie.She doesn’t think there is enough to go around.
+Her friends do not agree. I don’t want pie anyway.
+\n
+To make the verb to be negative, the formula is [to be] + not.
+\nExample:
+I am not a pie lover, but Pauline sure is.
+You aren’t ready for such delicious pie.
+\n\nHow to ask a question\n\n
+The formula for asking a question in the simple present is do/does + [subject] + [root form of verb].
+\nExample: Do you know how to bake a pie? How much does Pauline love pie?
+
+
+    </string>
+
 </resources>
