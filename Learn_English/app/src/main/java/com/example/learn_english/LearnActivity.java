@@ -25,8 +25,12 @@ import java.util.concurrent.CountDownLatch;
 
 public class LearnActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private TextAdapter textAdapter;
+    //    private TextAdapter textAdapter;
     private List<TextItem> textList;
+
+    private String getSelectedTopicName;
+
+    TextView tvLearn;
 //    TextView textView;
 
     @Override
@@ -35,15 +39,16 @@ public class LearnActivity extends AppCompatActivity {
         setContentView(R.layout.activity_learn);
 
 // Inside your onCreate() or onCreateView() method
-        recyclerView = findViewById(R.id.rv);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+       /* recyclerView = findViewById(R.id.rv);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));*/
 
         textList = new ArrayList<>(); // Initialize the textList
-        textAdapter = new TextAdapter(textList);
-        RecyclerView recyclerView = findViewById(R.id.rv);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(textAdapter);
+        getSelectedTopicName = getIntent().getStringExtra("selectedTopic");
+
+        getSelectedTopicName = getSelectedTopicName.replace(" ", "");
+        tvLearn = findViewById(R.id.learn);
         loadText();
+
 
 
 
@@ -188,32 +193,35 @@ public class LearnActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(Void... voids) {
-            String textFromResource = getResources().getString(R.string.PresentSimple);
-            int chunkSize = 50;
+//            String textFromResource = getResources().getString(R.string.PresentSimple);
+//            int chunkSize = 50;
+//
+//            List<String> textChunks = new ArrayList<>();
+//            for (int i = 0; i < textFromResource.length(); i += chunkSize) {
+//                int endIndex = Math.min(i + chunkSize, textFromResource.length());
+//                String chunk = textFromResource.substring(i, endIndex);
+//                textChunks.add(chunk);
+//            }
 
-            List<String> textChunks = new ArrayList<>();
-            for (int i = 0; i < textFromResource.length(); i += chunkSize) {
-                int endIndex = Math.min(i + chunkSize, textFromResource.length());
-                String chunk = textFromResource.substring(i, endIndex);
-                textChunks.add(chunk);
-            }
+            DatabaseReference learnRef = FirebaseDatabase.getInstance().getReference("learn").child(getSelectedTopicName);
 
-            DatabaseReference learnRef = FirebaseDatabase.getInstance().getReference("tenses/learn");
+            final String[] text = {""};
+//            for (int i = 0; i < textChunks.size(); i++) {
+//                String chunk = textChunks.get(i);
+//                learnRef.child("chunk" + (i + 1)).setValue(chunk);
+//            }
 
-            for (int i = 0; i < textChunks.size(); i++) {
-                String chunk = textChunks.get(i);
-                learnRef.child("chunk" + (i + 1)).setValue(chunk);
-            }
-
-            final StringBuilder stringBuilder = new StringBuilder();
+//            final StringBuilder stringBuilder = new StringBuilder();
             final CountDownLatch latch = new CountDownLatch(1);
 
             learnRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     for (DataSnapshot chunkSnapshot : dataSnapshot.getChildren()) {
-                        String chunk = chunkSnapshot.getValue(String.class);
-                        stringBuilder.append(chunk);
+
+                        String learn = chunkSnapshot.getValue(String.class);
+                        text[0] = learn;
+//                        stringBuilder.append(chunk);
                     }
                     latch.countDown();
                 }
@@ -232,16 +240,15 @@ public class LearnActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            return stringBuilder.toString();
+            return text[0];
         }
 
         @Override
         protected void onPostExecute(String fullText) {
             Log.e("eee", "data: " + fullText);
-
+            fullText = fullText.replace("/n", "\n");
             // Display the full text in your TextView
-            textList.add(new TextItem(fullText));
-            textAdapter.notifyDataSetChanged();
+            tvLearn.setText(fullText);
         }
     }
 

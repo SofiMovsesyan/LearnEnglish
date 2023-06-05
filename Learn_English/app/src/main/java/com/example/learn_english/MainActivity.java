@@ -37,21 +37,20 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
 
-            sign_in = findViewById(R.id.sign_in);
-            sign_up = findViewById(R.id.sign_up);
+        sign_in = findViewById(R.id.sign_in);
+        sign_up = findViewById(R.id.sign_up);
 
-            sign_in.setOnClickListener(v -> {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
-            });
+        sign_in.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        });
 
-            sign_up.setOnClickListener(v -> {
-                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
-                startActivity(intent);
-                finish();
-            });
-        }
+        sign_up.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+            startActivity(intent);
+            finish();
+        });
     }
-
+}
 

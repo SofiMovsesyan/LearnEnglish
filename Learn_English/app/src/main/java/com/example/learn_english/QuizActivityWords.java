@@ -1,4 +1,3 @@
-
 package com.example.learn_english;
 
 import androidx.annotation.NonNull;
@@ -445,8 +444,13 @@ public class QuizActivityWords extends AppCompatActivity {
 
         if (curQuestPos < questionsLists.size()) {
             selectedOptionByUser = "";
+            word.setText(" ");
+            word.setEnabled(true);
+            word.setTextColor(Color.parseColor("#ae8df2"));
+
             question.setText(questionsLists.get(curQuestPos).getQuestion());
             questions.setText((curQuestPos + 1) + "/" + questionsLists.size());
+
             DatabaseReference imageRef = FirebaseDatabase.getInstance().getReference()
                     .child("words").child("quiz").child(getSelectedTopicName).child("question" + (curQuestPos +1)).child("image");
             imageRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -582,5 +586,4 @@ public class QuizActivityWords extends AppCompatActivity {
         new LoadQuestionsTask().execute();
     }
 }
-
 

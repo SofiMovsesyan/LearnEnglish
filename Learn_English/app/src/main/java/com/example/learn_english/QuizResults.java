@@ -67,6 +67,7 @@ public class QuizResults extends AppCompatActivity {
     ProgressBar progressBar;
     private String getSelectedTopicName;
 
+    private TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,13 +76,18 @@ public class QuizResults extends AppCompatActivity {
         correct = findViewById(R.id.correct);
         incorrect = findViewById(R.id.incorrect);
         progressBar = findViewById(R.id.progressBar);
+        textView = findViewById(R.id.txt);
         getSelectedTopicName = getIntent().getStringExtra("selectedTopicName");
 
-        Toast.makeText(this, "" + getSelectedTopicName, Toast.LENGTH_SHORT).show();
         getSelectedTopicName = getSelectedTopicName.replace(" ", "");
         int correctAnswers = getIntent().getIntExtra("correct", 0);
         int incorrectAnswers = getIntent().getIntExtra("incorrect", 0);
 
+        if (correctAnswers <= 5) {
+            textView.setText("You can do better!");
+        }else {
+            textView.setText("You've completed quiz successfully");
+        }
         correct.setText(String.valueOf(correctAnswers));
         incorrect.setText(String.valueOf(incorrectAnswers));
 
@@ -99,24 +105,24 @@ public class QuizResults extends AppCompatActivity {
 //        getSelectedTopicName.equals("PastPerfect")  || getSelectedTopicName.equals("PastPerfectContinuous") ||
 //        getSelectedTopicName.equals("FutureSimple") || getSelectedTopicName.equals("FutureContinuous") ||
 //        getSelectedTopicName.equals("FuturePerfect") || getSelectedTopicName.equals("FuturePerfectContinuous")) {
-            DatabaseReference tensesRef = FirebaseDatabase.getInstance().getReference("users").child(userId).child("tenses");
+        DatabaseReference tensesRef = FirebaseDatabase.getInstance().getReference("users").child(userId).child("tenses");
 //
 //// Create a HashMap to store the tenses values
-            HashMap<String, Object> tensesMap = new HashMap<>();
-            tensesMap.put(getSelectedTopicName, progressPercentage);
+        HashMap<String, Object> tensesMap = new HashMap<>();
+        tensesMap.put(getSelectedTopicName, progressPercentage);
 //
 //// Update the tenses values in the Firebase Realtime Database
-            tensesRef.updateChildren(tensesMap);
+        tensesRef.updateChildren(tensesMap);
 //        }else {
 //            Toast.makeText(this, "else", Toast.LENGTH_SHORT).show();
-            DatabaseReference prepRef = FirebaseDatabase.getInstance().getReference("users").child(userId).child("prepositions");
+        DatabaseReference prepRef = FirebaseDatabase.getInstance().getReference("users").child(userId).child("prepositions");
 //
 //// Create a HashMap to store the tenses values
-            HashMap<String, Object> prepMap = new HashMap<>();
-            prepMap.put(getSelectedTopicName, progressPercentage);
+        HashMap<String, Object> prepMap = new HashMap<>();
+        prepMap.put(getSelectedTopicName, progressPercentage);
 //
 //// Update the tenses values in the Firebase Realtime Database
-            prepRef.updateChildren(prepMap);
+        prepRef.updateChildren(prepMap);
 //        }
         progressBar.setProgress(progressPercentage);
 
@@ -133,4 +139,3 @@ public class QuizResults extends AppCompatActivity {
 //        editor.apply();
     }
 }
-

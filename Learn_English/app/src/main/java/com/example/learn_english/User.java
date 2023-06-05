@@ -3,9 +3,9 @@ package com.example.learn_english;
 public class User {
     private String id;
     private String email;
-//    private int progress;
-private Tenses tenses;
-private Prepositions prepositions;
+    //    private int progress;
+    private Tenses tenses;
+    private Prepositions prepositions;
     public User() {
         // Default constructor required for Firebase
     }

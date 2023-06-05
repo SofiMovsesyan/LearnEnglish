@@ -44,7 +44,9 @@ public class PrepositionsRecyclerViewAdapter extends RecyclerView.Adapter<Prepos
     public void onBindViewHolder(@NonNull PrepositionsRecyclerViewAdapter.MyViewHolder holder, int position) {
         PrepositionsModel prepositionsModel = prepositionsModels.get(position);
         holder.prepositionName.setText(prepositionsModel.getPrepostionName());
-//        int progress = getUserProgressForItem(position);
+        getUserData(position, holder);
+
+        //        int progress = getUserProgressForItem(position);
 //
 //        // Update the progress bar for the item
 //        holder.progressBar.setProgress(progress);
