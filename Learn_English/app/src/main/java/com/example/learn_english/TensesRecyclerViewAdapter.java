@@ -95,12 +95,15 @@ public class TensesRecyclerViewAdapter extends RecyclerView.Adapter<TensesRecycl
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users")
                 .child(userId).child("tenses").child(tensesModels.get(position).getTenseName().replace(" ", ""));
 
-        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        final ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    int presentSimpleProgress = snapshot.getValue(Integer.class);
-                    updateProgressBar(position, presentSimpleProgress, holder);
+                    int myProgress = snapshot.getValue(Integer.class);
+                    updateProgressBar(position, myProgress, holder);
+
+                    // Update the RecyclerView item after getting the data
+                    notifyItemChanged(position);
                 } else {
                     // Handle the case where the presentSimpleProgress value doesn't exist
                 }
@@ -110,7 +113,10 @@ public class TensesRecyclerViewAdapter extends RecyclerView.Adapter<TensesRecycl
             public void onCancelled(@NonNull DatabaseError error) {
                 // Handle the error case
             }
-        });
+        };
+
+        // Add a ValueEventListener to listen for changes in the data
+        userRef.addValueEventListener(valueEventListener);
         return null;
     }
 

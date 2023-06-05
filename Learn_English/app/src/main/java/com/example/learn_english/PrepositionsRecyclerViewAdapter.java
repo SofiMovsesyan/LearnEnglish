@@ -78,12 +78,15 @@ public class PrepositionsRecyclerViewAdapter extends RecyclerView.Adapter<Prepos
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users")
                 .child(userId).child("prepositions").child(prepositionsModels.get(position).getPrepostionName().replace(" ", ""));
 
-        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        final ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    int presentSimpleProgress = snapshot.getValue(Integer.class);
-                    updateProgressBar(position, presentSimpleProgress, holder);
+                    int myProgress = snapshot.getValue(Integer.class);
+                    updateProgressBar(position, myProgress, holder);
+
+                    // Update the RecyclerView item after getting the data
+                    notifyItemChanged(position);
                 } else {
                     // Handle the case where the presentSimpleProgress value doesn't exist
                 }
@@ -93,7 +96,10 @@ public class PrepositionsRecyclerViewAdapter extends RecyclerView.Adapter<Prepos
             public void onCancelled(@NonNull DatabaseError error) {
                 // Handle the error case
             }
-        });
+        };
+
+        // Add a ValueEventListener to listen for changes in the data
+        userRef.addValueEventListener(valueEventListener);
         return null;
     }
 

@@ -98,31 +98,20 @@ public class QuizResults extends AppCompatActivity {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
 
-// Get a reference to the user's tenses node in the Firebase Realtime Database
-//        if (getSelectedTopicName.equals("PresentSimple") || getSelectedTopicName.equals("PresentContinuous") ||
-//        getSelectedTopicName.equals("PresentPerfect")|| getSelectedTopicName.equals("PresentPerfectContinuous")||
-//        getSelectedTopicName.equals("PastSimple") || getSelectedTopicName.equals("PastContinuous") ||
-//        getSelectedTopicName.equals("PastPerfect")  || getSelectedTopicName.equals("PastPerfectContinuous") ||
-//        getSelectedTopicName.equals("FutureSimple") || getSelectedTopicName.equals("FutureContinuous") ||
-//        getSelectedTopicName.equals("FuturePerfect") || getSelectedTopicName.equals("FuturePerfectContinuous")) {
-        DatabaseReference tensesRef = FirebaseDatabase.getInstance().getReference("users").child(userId).child("tenses");
-//
-//// Create a HashMap to store the tenses values
+       DatabaseReference tensesRef = FirebaseDatabase.getInstance().getReference("users").child(userId).child("tenses");
         HashMap<String, Object> tensesMap = new HashMap<>();
         tensesMap.put(getSelectedTopicName, progressPercentage);
-//
-//// Update the tenses values in the Firebase Realtime Database
         tensesRef.updateChildren(tensesMap);
-//        }else {
-//            Toast.makeText(this, "else", Toast.LENGTH_SHORT).show();
+
         DatabaseReference prepRef = FirebaseDatabase.getInstance().getReference("users").child(userId).child("prepositions");
-//
-//// Create a HashMap to store the tenses values
         HashMap<String, Object> prepMap = new HashMap<>();
         prepMap.put(getSelectedTopicName, progressPercentage);
-//
-//// Update the tenses values in the Firebase Realtime Database
         prepRef.updateChildren(prepMap);
+
+        DatabaseReference wordRef = FirebaseDatabase.getInstance().getReference("users").child(userId).child("words");
+        HashMap<String, Object> wordMap = new HashMap<>();
+        wordMap.put(getSelectedTopicName, progressPercentage);
+        wordRef.updateChildren(prepMap);
 //        }
         progressBar.setProgress(progressPercentage);
 

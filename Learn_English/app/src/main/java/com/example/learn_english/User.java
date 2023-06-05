@@ -5,6 +5,7 @@ public class User {
     private String email;
     //    private int progress;
     private Tenses tenses;
+    private Words words;
     private Prepositions prepositions;
     public User() {
         // Default constructor required for Firebase
@@ -54,5 +55,13 @@ public class User {
 
     public void setPrepositions(Prepositions prepositions) {
         this.prepositions = prepositions;
+    }
+
+    public Words getWords() {
+        return words;
+    }
+
+    public void setWords(Words words) {
+        this.words = words;
     }
 }
