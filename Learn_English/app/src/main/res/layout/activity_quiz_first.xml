@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".QuizActivityTenses"
-    android:background="#ECF2FF">
+    android:background="@color/my_bg">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -21,7 +21,7 @@
     <TextView
         android:id="@+id/topicName"
         android:layout_width="match_parent"
-        android:layout_height="81dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
         android:fontFamily="@font/polayfairdisplay_regular"
         android:text="Learn English"
@@ -42,6 +42,7 @@
         android:background="@color/my_bg"
         android:gravity="center"
         android:orientation="vertical"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2">

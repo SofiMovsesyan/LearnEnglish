@@ -17,7 +17,6 @@
     </string-array>
 
     <string-array name="prepositions">
-        <item>Prepositions of Time</item>
 
         <item>Simple Preposition</item>
         <item>Double Preposition</item>
@@ -25,6 +24,8 @@
         <item>Participle Preposition</item>
         <item>Disguised Preposition</item>
         <item>Detached Preposition</item>
+        <item>Prepositions of Time</item>
+
         <item>Prepositions of Place and Direction</item>
         <item>Prepositions of Agents or Things</item>
         <item>Phrasal Prepositions</item>
@@ -34,7 +35,6 @@
     <string-array name="words">
         <item>Animals</item>
         <item>Clothes and Accessories</item>
-        <item>Education</item>
         <item>Entertainment and Media</item>
         <item>Food and Drink</item>
         <item>Hobbies and Leisure</item>

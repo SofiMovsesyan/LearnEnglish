@@ -447,10 +447,10 @@ public class QuizActivityWords extends AppCompatActivity {
             word.setText(" ");
             word.setEnabled(true);
             word.setTextColor(Color.parseColor("#ae8df2"));
+            check.setVisibility(View.VISIBLE);
 
             question.setText(questionsLists.get(curQuestPos).getQuestion());
             questions.setText((curQuestPos + 1) + "/" + questionsLists.size());
-
             DatabaseReference imageRef = FirebaseDatabase.getInstance().getReference()
                     .child("words").child("quiz").child(getSelectedTopicName).child("question" + (curQuestPos +1)).child("image");
             imageRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -510,10 +510,24 @@ public class QuizActivityWords extends AppCompatActivity {
 
     private void revealAnswer() {
         final String getAnswer = questionsLists.get(curQuestPos).getAnswer();
-
-        if (word.getText().toString().toLowerCase().equals(getAnswer)) {
+        check.setVisibility(View.GONE);
+        selectedOptionByUser = word.getText().toString().trim().toLowerCase();
+//        Toast.makeText(this, ""+getAnswer, Toast.LENGTH_SHORT).show();
+        if (selectedOptionByUser.equals(getAnswer.trim().toLowerCase())) {
             word.setTextColor(Color.parseColor("#62B865"));
             word.setEnabled(false);
+
+            /*// IMAGE TO FIREBASE
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.t_shirt);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+            byte[] imageBytes = baos.toByteArray();
+            String base64Image = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+            // Save the Base64 image string to Firebase Realtime Database
+            DatabaseReference imageRef = FirebaseDatabase.getInstance().getReference().child("words")
+                    .child("quiz").child(getSelectedTopicName).child("question1");
+            imageRef.child("image").setValue(base64Image);
+            Toast.makeText(this, "Image saved to Firebase!", Toast.LENGTH_SHORT).show();*/
         } else {
             word.setTextColor(Color.parseColor("#ff0000"));
             word.setText(getAnswer);

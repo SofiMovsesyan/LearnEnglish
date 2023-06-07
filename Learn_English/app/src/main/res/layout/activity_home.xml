@@ -20,8 +20,8 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="404dp"
-        android:layout_height="67dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
         android:fontFamily="@font/polayfairdisplay_regular"
         android:text="Learn English"
@@ -32,15 +32,18 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="68dp"
         android:layout_weight="1"
         android:background="@color/my_bg"
         android:orientation="vertical"
         android:weightSum="4"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2">
 
@@ -50,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginLeft="50dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="40dp"
             android:layout_marginRight="50dp"
             android:background="@drawable/sign_up"
             android:fontFamily="@font/polayfairdisplay_regular"
@@ -66,7 +69,7 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginLeft="50dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="70dp"
             android:layout_marginRight="50dp"
             android:background="@drawable/button_middle"
             android:fontFamily="@font/polayfairdisplay_regular"
@@ -83,7 +86,7 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginLeft="50dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="70dp"
             android:layout_marginRight="50dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/sign_up"
@@ -118,7 +121,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="90dp"
         android:layout_marginRight="90dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="90dp"
         android:background="@drawable/sign_in"
         android:fontFamily="@font/polayfairdisplay_regular"
         android:text="Log out"

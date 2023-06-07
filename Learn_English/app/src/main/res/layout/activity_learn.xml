@@ -21,7 +21,7 @@
     <TextView
         android:id="@+id/topicName"
         android:layout_width="match_parent"
-        android:layout_height="81dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
         android:fontFamily="@font/polayfairdisplay_regular"
         android:text="Learn English"

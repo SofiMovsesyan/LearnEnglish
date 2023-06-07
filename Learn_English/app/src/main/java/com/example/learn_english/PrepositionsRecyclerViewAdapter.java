@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -46,10 +45,6 @@ public class PrepositionsRecyclerViewAdapter extends RecyclerView.Adapter<Prepos
         holder.prepositionName.setText(prepositionsModel.getPrepostionName());
         getUserData(position, holder);
 
-        //        int progress = getUserProgressForItem(position);
-//
-//        // Update the progress bar for the item
-//        holder.progressBar.setProgress(progress);
         holder.ll2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,20 +80,16 @@ public class PrepositionsRecyclerViewAdapter extends RecyclerView.Adapter<Prepos
                     int myProgress = snapshot.getValue(Integer.class);
                     updateProgressBar(position, myProgress, holder);
 
-                    // Update the RecyclerView item after getting the data
                     notifyItemChanged(position);
                 } else {
-                    // Handle the case where the presentSimpleProgress value doesn't exist
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // Handle the error case
             }
         };
 
-        // Add a ValueEventListener to listen for changes in the data
         userRef.addValueEventListener(valueEventListener);
         return null;
     }

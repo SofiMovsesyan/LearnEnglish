@@ -1,6 +1,5 @@
 package com.example.learn_english;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
@@ -79,61 +78,7 @@ public class LoginActivity extends AppCompatActivity {
         }, 10);
 
     }
-
-    //    private void LoginUser() {
-//        String email = LogEmail.getText().toString();
-//        String password = LogPassword.getText().toString();
-//
-//        if (!email.matches(emailPattern)) {
-//            LogEmail.setError("Enter Correct Email");
-//            LogEmail.requestFocus();
-//        } else if (password.isEmpty() || password.length() < 8 ) {
-//            LogPassword.setError("Enter Proper Password");
-//            LogPassword.requestFocus();
-//
-//        } else {
-//
-//            progressDialog.setMessage("Please Wait While Login...");
-//            progressDialog.setTitle("Login");
-//            progressDialog.setCanceledOnTouchOutside(false);
-//            progressDialog.show();
-//
-//            mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//                @Override
-//                public void onComplete(@NonNull Task<AuthResult> task) {
-//                    if (task.isSuccessful()) {
-//                        mUser = mAuth.getCurrentUser();
-//
-//                        if (mUser != null ) {
-//                            if(mUser.isEmailVerified()){
-//                                SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
-//                                SharedPreferences.Editor editor = sharedPreferences.edit();
-//                                editor.putBoolean("hasLoggedIn", true);
-//                                editor.commit();
-//                                progressDialog.dismiss();
-//                                sendUserToNextActivity();
-//                                Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-//                            }}
-//                        else {
-//                            progressDialog.dismiss();
-//                            err.setError("Verify your email");
-//                            err.setFocusable(true);
-//                            err.setFocusableInTouchMode(true);
-//                            err.requestFocus();
-//                        }
-//                    }
-//                    else {
-//                        progressDialog.dismiss();
-//                        err.setError("Your password or Email is wrong");
-//                        err.setFocusable(true);
-//                        err.setFocusableInTouchMode(true);
-//                        err.requestFocus();
-//                        Toast.makeText(LoginActivity.this, ""+task.getException(), Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//            });
-//        }
-//    }
+    
     private void LoginUser() {
         String email = LogEmail.getText().toString();
         String password = LogPassword.getText().toString();

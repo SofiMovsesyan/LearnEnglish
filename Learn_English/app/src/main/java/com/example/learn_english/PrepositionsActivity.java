@@ -30,7 +30,6 @@ public class PrepositionsActivity extends AppCompatActivity {
         int itemPosition = getIntent().getIntExtra("itemPosition", -1);
         int quizProgress = getIntent().getIntExtra("quizProgress", 0);
 
-        // Update the progress of the specific item in the adapter
         if (itemPosition != -1) {
             PrepositionsModel model = prepositionsModels.get(itemPosition);
             model.setProgress(quizProgress);
