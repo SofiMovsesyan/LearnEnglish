@@ -63,5 +63,17 @@ The formula for asking a question in the simple present is do/does + [subject] +
 
 
     </string>
+    <string name="welcome">Welcome!</string>
+    <string name="sign_in_to_continue_your_journey">Sign in to continue your journey</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="create_account">CREATE ACCOUNT</string>
+    <string name="or">OR</string>
+    <string name="learn_english">© 2025 Learn English.</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="sign_in_to_continue">Sign in to continue</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
 
 </resources>

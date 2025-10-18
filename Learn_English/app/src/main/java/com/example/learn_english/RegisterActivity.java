@@ -2,16 +2,19 @@ package com.example.learn_english;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -22,7 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
-    TextView alrhaveacc;
+    TextView alrhaveacc, err;
     EditText RegName, RegEmail, RegPassword, ConfPass;
     Button Regbtn;
     String emailPattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
@@ -31,32 +34,165 @@ public class RegisterActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseUser mUser;
 
+    private Animations animations;
+    private ImageView waveHeaderA, waveHeaderB;
+    private ImageView waveLayer2A, waveLayer2B;
+    private ImageView waveLayer3A, waveLayer3B;
+    private ImageView bubble1, bubble2, bubble3, bubble4;
+    private View mainCard;
+    private ConstraintLayout rootLayout;
+    private int originalCardHeight;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        // Initialize animations
+        animations = new Animations();
+
+        // Initialize views
+        initializeViews();
+
+        // Setup animations
+        setupAnimations();
+
+        // Setup click listeners with animations
+        setupClickListenersWithAnimations();
+
+        progressDialog = new ProgressDialog(this);
+        mAuth = FirebaseAuth.getInstance();
+    }
+
+    private void initializeViews() {
+        // Get the root ConstraintLayout
+        rootLayout = findViewById(R.id.root_constraint);
+
+        mainCard = findViewById(R.id.mainContent);
+        err = findViewById(R.id.err);
+
+        // Store original card height after layout
+        if (mainCard != null) {
+            mainCard.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    mainCard.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    originalCardHeight = mainCard.getHeight();
+                }
+            });
+        }
+
+        // Wave views
+        waveHeaderA = findViewById(R.id.waveHeaderA);
+        waveHeaderB = findViewById(R.id.waveHeaderB);
+        waveLayer2A = findViewById(R.id.waveLayer2A);
+        waveLayer2B = findViewById(R.id.waveLayer2B);
+        waveLayer3A = findViewById(R.id.waveLayer3A);
+        waveLayer3B = findViewById(R.id.waveLayer3B);
+
+        // Bubble views
+        bubble1 = findViewById(R.id.bubble1);
+        bubble2 = findViewById(R.id.bubble2);
+        bubble3 = findViewById(R.id.bubble3);
+        bubble4 = findViewById(R.id.bubble4);
+
+        // Form views
         alrhaveacc = findViewById(R.id.alrhaveacc);
         RegName = findViewById(R.id.RegName);
         RegEmail = findViewById(R.id.RegEmail);
         RegPassword = findViewById(R.id.RegPassword);
         ConfPass = findViewById(R.id.ConfPass);
         Regbtn = findViewById(R.id.Regbtn);
-        progressDialog = new ProgressDialog(this);
-        mAuth = FirebaseAuth.getInstance();
+    }
 
+    private void setupAnimations() {
+        View root = findViewById(android.R.id.content);
+
+        animations.waitForLayout(root, () -> {
+            // Start wave animations if wave views exist
+            if (waveHeaderA != null && waveHeaderB != null) {
+                animations.startWaveAnimations(waveHeaderA, waveHeaderB,
+                        waveLayer2A, waveLayer2B, waveLayer3A, waveLayer3B);
+            }
+
+            // Start bubble animations if bubble views exist
+            if (bubble1 != null && bubble2 != null && bubble3 != null && bubble4 != null) {
+                animations.startBubbleAnimations(root, bubble1, bubble2, bubble3, bubble4);
+            }
+
+            // Apply entrance animations to form elements
+            animateFormEntrance();
+        });
+    }
+
+    private void animateFormEntrance() {
+        // Slide up and fade in the main card/content
+        View mainCard = findViewById(R.id.mainContent);
+        if (mainCard != null) {
+            animations.slideUpView(mainCard, 800);
+        }
+
+        // Staggered animation for form elements
+        new Handler().postDelayed(() -> {
+            if (RegName != null) animations.fadeInView(RegName, 400);
+        }, 200);
+
+        new Handler().postDelayed(() -> {
+            if (RegEmail != null) animations.fadeInView(RegEmail, 400);
+        }, 400);
+
+        new Handler().postDelayed(() -> {
+            if (RegPassword != null) animations.fadeInView(RegPassword, 400);
+        }, 600);
+
+        new Handler().postDelayed(() -> {
+            if (ConfPass != null) animations.fadeInView(ConfPass, 400);
+        }, 800);
+    }
+
+    private void setupClickListenersWithAnimations() {
         alrhaveacc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
+                // Add scale animation on click
+                v.animate()
+                        .scaleX(0.95f)
+                        .scaleY(0.95f)
+                        .setDuration(100)
+                        .withEndAction(() -> {
+                            v.animate()
+                                    .scaleX(1f)
+                                    .scaleY(1f)
+                                    .setDuration(100)
+                                    .start();
+
+                            // Navigate after animation
+                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                            startActivity(intent);
+                        })
+                        .start();
             }
         });
 
         Regbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CreateAuth();
+                // Add button press animation
+                v.animate()
+                        .scaleX(0.95f)
+                        .scaleY(0.95f)
+                        .setDuration(100)
+                        .withEndAction(() -> {
+                            v.animate()
+                                    .scaleX(1f)
+                                    .scaleY(1f)
+                                    .setDuration(100)
+                                    .start();
+
+                            // Call registration method after animation
+                            CreateAuth();
+                        })
+                        .start();
             }
         });
     }
@@ -68,15 +204,20 @@ public class RegisterActivity extends AppCompatActivity {
         String confirmPass = ConfPass.getText().toString();
 
         if (name.isEmpty()) {
-            RegName.setError("Enter Your Name");
+            animations.shakeView(RegName);
+            showBeautifulError("Please enter your full name");
+            RegName.requestFocus();
         } else if (!email.matches(emailPattern)) {
-            RegEmail.setError("Enter Correct Email");
+            animations.shakeView(RegEmail);
+            showBeautifulError("Please enter a valid email address");
             RegEmail.requestFocus();
         } else if (password.isEmpty() || password.length() < 8) {
-            RegPassword.setError("Password must be at least 8 characters");
+            animations.shakeView(RegPassword);
+            showBeautifulError("Password must be at least 8 characters");
             RegPassword.requestFocus();
         } else if (!password.equals(confirmPass)) {
-            ConfPass.setError("Password not matched");
+            animations.shakeView(ConfPass);
+            showBeautifulError("Passwords do not match");
             ConfPass.requestFocus();
         } else {
             progressDialog.setMessage("Please Wait While Registration...");
@@ -87,15 +228,36 @@ public class RegisterActivity extends AppCompatActivity {
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
+                            showBeautifulSuccess("Registration successful! Sending verification email...");
                             sendVerificationEmail();
                         } else {
                             progressDialog.dismiss();
-                            Toast.makeText(RegisterActivity.this, "Registration Failed: " + task.getException(), Toast.LENGTH_SHORT).show();
+                            showBeautifulError("Registration failed: " + task.getException().getMessage());
                         }
                     });
         }
     }
 
+    // Beautiful error message methods
+    private void showBeautifulError(String message) {
+        if (err != null) {
+            animations.showErrorWithAnimation(err, message);
+
+            new Handler().postDelayed(() -> {
+                animations.hideMessageWithAnimation(err);
+            }, 5000);
+        }
+    }
+
+    private void showBeautifulSuccess(String message) {
+        if (err != null) {
+            animations.showSuccessWithAnimation(err, message);
+
+            new Handler().postDelayed(() -> {
+                animations.hideMessageWithAnimation(err);
+            }, 3000);
+        }
+    }
 
     private void sendVerificationEmail() {
         mUser = mAuth.getCurrentUser();
@@ -111,35 +273,75 @@ public class RegisterActivity extends AppCompatActivity {
                         // Create a User object
                         User user = new User(userId, email);
 
-                        Tenses tenses = new Tenses(0, 0, 0,0,0,0,0,0,0,0,0,0); // Assuming default progress keys are 0
+                        Tenses tenses = new Tenses(0, 0, 0,0,0,0,0,0,0,0,0,0);
                         Prepositions prepositions = new Prepositions(0,0,0,0,0,0,0,0,0,0);
-// Add the tenses object to the user
                         Words words = new Words(0,0,0,0,0,0,0,0);
                         user.setTenses(tenses);
                         user.setPrepositions(prepositions);
                         user.setWords(words);
-                        // Store the user in Firebase Realtime Database
+
                         DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
                         usersRef.child(userId).setValue(user);
 
-                        sendUserToNextActivity();
-                    } else {
-                        // Failed to send verification email
-                        Toast.makeText(RegisterActivity.this, "Failed to send verification email.", Toast.LENGTH_SHORT).show();
-                    }
-                    sendUserToNextActivity();
+                        progressDialog.dismiss();
+                        showBeautifulSuccess("Verification email sent! Please check your inbox.");
 
+                        new Handler().postDelayed(() -> {
+                            sendUserToNextActivity();
+                        }, 2000);
+                    } else {
+                        progressDialog.dismiss();
+                        showBeautifulError("Failed to send verification email. Please try again.");
+                    }
                 }
             });
         }
     }
 
-
-
-
     private void sendUserToNextActivity() {
-        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+        // Fade out animation before navigation
+        View root = findViewById(android.R.id.content);
+        if (root != null) {
+            root.animate()
+                    .alpha(0f)
+                    .setDuration(500)
+                    .withEndAction(() -> {
+                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
+                    })
+                    .start();
+        } else {
+            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (animations != null) {
+            animations.pauseAnimations();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (animations != null && waveHeaderA != null && waveHeaderB != null) {
+            animations.startWaveAnimations(waveHeaderA, waveHeaderB,
+                    waveLayer2A, waveLayer2B, waveLayer3A, waveLayer3B);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (animations != null) {
+            animations.cleanupAnimations();
+        }
     }
 }

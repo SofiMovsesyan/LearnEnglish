@@ -10,12 +10,10 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -30,10 +28,19 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseUser mUser;
 
+    private Animations animations;
+    private ImageView waveHeaderA, waveHeaderB;
+    private ImageView waveLayer2A, waveLayer2B;
+    private ImageView waveLayer3A, waveLayer3B;
+    private ImageView bubble1, bubble2, bubble3, bubble4;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        animations = new Animations();
+        initializeViews();
+        setupAnimations();
 
         crAcc = findViewById(R.id.crAcc);
         err = findViewById(R.id.err);
@@ -42,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         Loginbtn = findViewById(R.id.Loginbtn);
         progressDialog = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -53,41 +61,127 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
                 }
                 else {
-                    crAcc.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-//                startActivity(new Intent(MainActivity.this, Register.class));
-                            Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
-                            startActivity(intent);
-//                Toast.makeText(MainActivity.this, "clicked", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-                    Loginbtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            LoginUser();
-
-
-                        }
-                    });
-
-
+                    setupClickListenersWithAnimations();
                 }
             }
         }, 10);
-
     }
-    
+
+    private void initializeViews() {
+        waveHeaderA = findViewById(R.id.waveHeaderA);
+        waveHeaderB = findViewById(R.id.waveHeaderB);
+        waveLayer2A = findViewById(R.id.waveLayer2A);
+        waveLayer2B = findViewById(R.id.waveLayer2B);
+        waveLayer3A = findViewById(R.id.waveLayer3A);
+        waveLayer3B = findViewById(R.id.waveLayer3B);
+
+        bubble1 = findViewById(R.id.bubble1);
+        bubble2 = findViewById(R.id.bubble2);
+        bubble3 = findViewById(R.id.bubble3);
+        bubble4 = findViewById(R.id.bubble4);
+
+        crAcc = findViewById(R.id.crAcc);
+        err = findViewById(R.id.err);
+        LogEmail = findViewById(R.id.LogEmail);
+        LogPassword = findViewById(R.id.LogPassword);
+        Loginbtn = findViewById(R.id.Loginbtn);
+    }
+
+    private void setupAnimations() {
+        View root = findViewById(android.R.id.content);
+
+        animations.waitForLayout(root, () -> {
+            if (waveHeaderA != null && waveHeaderB != null) {
+                animations.startWaveAnimations(waveHeaderA, waveHeaderB,
+                        waveLayer2A, waveLayer2B, waveLayer3A, waveLayer3B);
+            }
+
+            if (bubble1 != null && bubble2 != null && bubble3 != null && bubble4 != null) {
+                animations.startBubbleAnimations(root, bubble1, bubble2, bubble3, bubble4);
+            }
+
+            animateFormEntrance();
+        });
+    }
+
+    private void animateFormEntrance() {
+        View mainCard = findViewById(R.id.mainContent);
+        if (mainCard != null) {
+            animations.slideUpView(mainCard, 800);
+        }
+
+        new Handler().postDelayed(() -> {
+            if (LogEmail != null) animations.fadeInView(LogEmail, 400);
+        }, 200);
+
+        new Handler().postDelayed(() -> {
+            if (LogPassword != null) animations.fadeInView(LogPassword, 400);
+        }, 400);
+
+        new Handler().postDelayed(() -> {
+            if (Loginbtn != null) animations.fadeInView(Loginbtn, 400);
+        }, 600);
+
+        new Handler().postDelayed(() -> {
+            if (crAcc != null) animations.fadeInView(crAcc, 400);
+        }, 800);
+    }
+
+    private void setupClickListenersWithAnimations() {
+        crAcc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.animate()
+                        .scaleX(0.95f)
+                        .scaleY(0.95f)
+                        .setDuration(100)
+                        .withEndAction(() -> {
+                            v.animate()
+                                    .scaleX(1f)
+                                    .scaleY(1f)
+                                    .setDuration(100)
+                                    .start();
+
+                            // Navigate after animation
+                            Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                            startActivity(intent);
+                        })
+                        .start();
+            }
+        });
+
+        Loginbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.animate()
+                        .scaleX(0.95f)
+                        .scaleY(0.95f)
+                        .setDuration(100)
+                        .withEndAction(() -> {
+                            v.animate()
+                                    .scaleX(1f)
+                                    .scaleY(1f)
+                                    .setDuration(100)
+                                    .start();
+
+                            LoginUser();
+                        })
+                        .start();
+            }
+        });
+    }
+
     private void LoginUser() {
         String email = LogEmail.getText().toString();
         String password = LogPassword.getText().toString();
 
         if (!email.matches(emailPattern)) {
-            LogEmail.setError("Enter Correct Email");
+            animations.shakeView(LogEmail);
+            showBeautifulError("Please enter a valid email address");
             LogEmail.requestFocus();
         } else if (password.isEmpty() || password.length() < 8) {
-            LogPassword.setError("Enter Proper Password");
+            animations.shakeView(LogPassword);
+            showBeautifulError("Password must be at least 8 characters");
             LogPassword.requestFocus();
         } else {
             progressDialog.setMessage("Please Wait While Login...");
@@ -105,34 +199,90 @@ public class LoginActivity extends AppCompatActivity {
                             editor.putBoolean("hasLoggedIn", true);
                             editor.apply();
                             progressDialog.dismiss();
-                            sendUserToNextActivity();
-                            Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+
+                            showBeautifulSuccess("Login successful! Welcome back!");
+
+                            new Handler().postDelayed(() -> {
+                                sendUserToNextActivity();
+                            }, 1500);
+
                         } else {
                             progressDialog.dismiss();
-                            err.setError("Verify your email");
-                            err.setFocusable(true);
-                            err.setFocusableInTouchMode(true);
-                            err.requestFocus();
-                            Toast.makeText(LoginActivity.this, "Email not verified", Toast.LENGTH_SHORT).show();
+                            showBeautifulError("Please verify your email before logging in");
                             mAuth.signOut();
                         }
                     }
                 } else {
                     progressDialog.dismiss();
-                    err.setError("Your password or Email is wrong");
-                    err.setFocusable(true);
-                    err.setFocusableInTouchMode(true);
-                    err.requestFocus();
-                    Toast.makeText(LoginActivity.this, "Login Failed: " + task.getException(), Toast.LENGTH_SHORT).show();
+                    showBeautifulError("Invalid email or password. Please try again.");
                 }
             });
         }
     }
 
+    private void showBeautifulError(String message) {
+        if (err != null) {
+            animations.showErrorWithAnimation(err, message);
+
+            new Handler().postDelayed(() -> {
+                animations.hideMessageWithAnimation(err);
+            }, 5000);
+        }
+    }
+
+    private void showBeautifulSuccess(String message) {
+        if (err != null) {
+            animations.showSuccessWithAnimation(err, message);
+
+            new Handler().postDelayed(() -> {
+                animations.hideMessageWithAnimation(err);
+            }, 3000);
+        }
+    }
+
     private void sendUserToNextActivity() {
-        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-        finish();
+        View root = findViewById(android.R.id.content);
+        if (root != null) {
+            root.animate()
+                    .alpha(0f)
+                    .setDuration(500)
+                    .withEndAction(() -> {
+                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
+                    })
+                    .start();
+        } else {
+            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (animations != null) {
+            animations.pauseAnimations();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (animations != null && waveHeaderA != null && waveHeaderB != null) {
+            animations.startWaveAnimations(waveHeaderA, waveHeaderB,
+                    waveLayer2A, waveLayer2B, waveLayer3A, waveLayer3B);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (animations != null) {
+            animations.cleanupAnimations();
+        }
     }
 }
