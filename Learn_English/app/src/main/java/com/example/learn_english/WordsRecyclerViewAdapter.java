@@ -1,5 +1,6 @@
 package com.example.learn_english;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.service.autofill.UserData;
@@ -44,7 +45,7 @@ public class WordsRecyclerViewAdapter extends RecyclerView.Adapter<WordsRecycler
     }
 
     @Override
-    public void onBindViewHolder(@NonNull WordsRecyclerViewAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull WordsRecyclerViewAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         WordsModel wordsModel = wordsModels.get(position);
         holder.wordName.setText(wordsModel.getWordsName());
         getUserData(position, holder);

@@ -1,5 +1,6 @@
 package com.example.learn_english;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -42,7 +43,7 @@ public class TensesRecyclerViewAdapter extends RecyclerView.Adapter<TensesRecycl
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TensesRecyclerViewAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TensesRecyclerViewAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         TensesModel tensesModel = tensesModels.get(position);
         holder.tenseName.setText(tensesModel.getTenseName());
         getUserData(position, holder);

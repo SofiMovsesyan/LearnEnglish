@@ -1,5 +1,6 @@
 package com.example.learn_english;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.service.autofill.UserData;
@@ -40,7 +41,7 @@ public class PrepositionsRecyclerViewAdapter extends RecyclerView.Adapter<Prepos
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PrepositionsRecyclerViewAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PrepositionsRecyclerViewAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         PrepositionsModel prepositionsModel = prepositionsModels.get(position);
         holder.prepositionName.setText(prepositionsModel.getPrepostionName());
         getUserData(position, holder);
