@@ -7,7 +7,6 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-<!--    -->
     <color name="light_blue">#95BDFF</color>
     <color name="light_green">#DFFFD8</color>
     <color name="my_blue">#B4E4FF</color>
@@ -16,18 +15,27 @@
     <color name="my_pink">#F7C8E0</color>
     <color name="my_red">#FB5050</color>
     <color name="my_green">#62B865</color>
-<!--    <color name="my_purple_dark">#ae8df2</color>-->
+    <!--    <color name="my_purple_dark">#ae8df2</color>-->
     <color name="my_purple_middle">#c9a7eb</color>
     <color name="my_purple_light">#ecc9ee</color>
-<!--    <color name="my_bg">#f5f5f5</color>-->
+    <!--    <color name="my_bg">#f5f5f5</color>-->
     <color name="purple_dark">#5E35B1</color>
     <color name="purple_light">#B39DDB</color>
     <color name="purple_background">#F3E5F5</color>
 
-        <color name="my_bg">#667eea</color>
-        <color name="my_purple_dark">#764ba2</color>
+    <color name="my_bg">#667eea</color>
+    <color name="my_purple_dark">#764ba2</color>
+    <color name="gradient_purple_dark">#5a6fd8</color>
+    <color name="purple_light_ripple">#20667eea</color>
+    <color name="gradient_purple_middle">#667eea</color>
+    <color name="gradient_purple_light">#764ba2</color>
+    <color name="purple_middle_ripple">#20667eea</color>
+    <color name="purple_dark_ripple">#205a6fd8</color>
+    <color name="text_secondary">#E6E6FA</color>
 
-        <!-- New gradient colors -->
-        <color name="gradient_purple_dark">#5a6fd8</color>
-        <color name="purple_light_ripple">#20667eea</color>
+    <color name="gradient_purple_extra_light">#F3E5F5</color>
+    <color name="gradient_blue_light">#E3F2FD</color>
+    <color name="gradient_green_light">#E8F5E8</color>
+    <color name="gradient_blue_dark">#1976D2</color>
+    <color name="gradient_green_dark">#388E3C</color>
 </resources>
