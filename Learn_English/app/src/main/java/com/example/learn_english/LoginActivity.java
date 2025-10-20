@@ -99,32 +99,7 @@ public class LoginActivity extends AppCompatActivity {
             if (bubble1 != null && bubble2 != null && bubble3 != null && bubble4 != null) {
                 animations.startBubbleAnimations(root, bubble1, bubble2, bubble3, bubble4);
             }
-
-            animateFormEntrance();
         });
-    }
-
-    private void animateFormEntrance() {
-        View mainCard = findViewById(R.id.mainContent);
-        if (mainCard != null) {
-            animations.slideUpView(mainCard, 800);
-        }
-
-        new Handler().postDelayed(() -> {
-            if (LogEmail != null) animations.fadeInView(LogEmail, 400);
-        }, 200);
-
-        new Handler().postDelayed(() -> {
-            if (LogPassword != null) animations.fadeInView(LogPassword, 400);
-        }, 400);
-
-        new Handler().postDelayed(() -> {
-            if (Loginbtn != null) animations.fadeInView(Loginbtn, 400);
-        }, 600);
-
-        new Handler().postDelayed(() -> {
-            if (crAcc != null) animations.fadeInView(crAcc, 400);
-        }, 800);
     }
 
     private void setupClickListenersWithAnimations() {

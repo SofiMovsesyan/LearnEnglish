@@ -31,7 +31,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        // Initialize animations
         animations = new Animations();
         initializeViews();
         setupAnimations();
@@ -39,7 +38,6 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void initializeViews() {
-        // Wave views
         waveHeaderA = findViewById(R.id.waveHeaderA);
         waveHeaderB = findViewById(R.id.waveHeaderB);
         waveLayer2A = findViewById(R.id.waveLayer2A);
@@ -47,13 +45,11 @@ public class HomeActivity extends AppCompatActivity {
         waveLayer3A = findViewById(R.id.waveLayer3A);
         waveLayer3B = findViewById(R.id.waveLayer3B);
 
-        // Bubble views
         bubble1 = findViewById(R.id.bubble1);
         bubble2 = findViewById(R.id.bubble2);
         bubble3 = findViewById(R.id.bubble3);
         bubble4 = findViewById(R.id.bubble4);
 
-        // Button views
         tenses = findViewById(R.id.tenses);
         prepositions = findViewById(R.id.prepositions);
         words = findViewById(R.id.words);
@@ -64,50 +60,24 @@ public class HomeActivity extends AppCompatActivity {
         View root = findViewById(android.R.id.content);
 
         animations.waitForLayout(root, () -> {
-            // Start wave animations if wave views exist
             if (waveHeaderA != null && waveHeaderB != null) {
                 animations.startWaveAnimations(waveHeaderA, waveHeaderB,
                         waveLayer2A, waveLayer2B, waveLayer3A, waveLayer3B);
             }
 
-            // Start bubble animations if bubble views exist
             if (bubble1 != null && bubble2 != null && bubble3 != null && bubble4 != null) {
                 animations.startBubbleAnimations(root, bubble1, bubble2, bubble3, bubble4);
             }
-
-            // Apply entrance animations to buttons
-            animateContentEntrance();
         });
     }
 
-    private void animateContentEntrance() {
-        // Staggered animation for buttons
-        new Handler().postDelayed(() -> {
-            if (tenses != null) animations.fadeInView(tenses, 400);
-        }, 200);
-
-        new Handler().postDelayed(() -> {
-            if (words != null) animations.fadeInView(words, 400);
-        }, 400);
-
-        new Handler().postDelayed(() -> {
-            if (prepositions != null) animations.fadeInView(prepositions, 400);
-        }, 600);
-
-        new Handler().postDelayed(() -> {
-            if (button != null) animations.fadeInView(button, 400);
-        }, 800);
-    }
-
     private void setupClickListeners() {
-        // Apply button click animations
         animations.applyButtonClickAnimation(tenses);
         animations.applyButtonClickAnimation(words);
         animations.applyButtonClickAnimation(prepositions);
         animations.applyButtonClickAnimation(button);
 
         tenses.setOnClickListener(v -> {
-            // Add navigation animation
             v.animate()
                     .scaleX(0.95f)
                     .scaleY(0.95f)
@@ -187,7 +157,7 @@ public class HomeActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("hasLoggedIn", false);
-        editor.apply(); // Use apply() instead of commit() for better performance
+        editor.apply();
 
         // Fade out animation before navigation
         View root = findViewById(android.R.id.content);

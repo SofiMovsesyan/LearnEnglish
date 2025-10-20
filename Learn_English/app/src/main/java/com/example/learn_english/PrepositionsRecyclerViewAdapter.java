@@ -3,33 +3,33 @@ package com.example.learn_english;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.service.autofill.UserData;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PrepositionsRecyclerViewAdapter extends RecyclerView.Adapter<PrepositionsRecyclerViewAdapter.MyViewHolder> {
     private Context context;
     private ArrayList<PrepositionsModel> prepositionsModels;
+    private Map<Integer, ValueEventListener> activeListeners;
 
     public PrepositionsRecyclerViewAdapter(Context context, ArrayList<PrepositionsModel> prepositionsModels) {
         this.context = context;
         this.prepositionsModels = prepositionsModels;
+        this.activeListeners = new HashMap<>();
     }
 
     @NonNull
@@ -42,62 +42,99 @@ public class PrepositionsRecyclerViewAdapter extends RecyclerView.Adapter<Prepos
 
     @Override
     public void onBindViewHolder(@NonNull PrepositionsRecyclerViewAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        PrepositionsModel prepositionsModel = prepositionsModels.get(position);
-        holder.prepositionName.setText(prepositionsModel.getPrepostionName());
-        getUserData(position, holder);
+        PrepositionsModel model = prepositionsModels.get(position);
 
-        holder.ll2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getUserData(position, holder);
-                Intent intent = new Intent(context, QuizActivityPrepositions.class);
-                intent.putExtra("selectedTopic", prepositionsModels.get(position).getPrepostionName());
-                context.startActivity(intent);
-            }
+        // Set initial data
+        holder.prepositionName.setText(model.getPrepositionName());
+        holder.progressBar.setProgress(model.getProgress());
+        holder.progressText.setText(model.getProgress() + "% completed");
+
+        // Remove any existing listener for this position
+        removeListener(position);
+
+        // Set up new Firebase listener
+        setupFirebaseListener(position, holder);
+
+        // Set click listeners
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, QuizActivityPrepositions.class);
+            intent.putExtra("selectedTopic", prepositionsModels.get(position).getPrepositionName());
+            intent.putExtra("itemPosition", position);
+            context.startActivity(intent);
         });
 
-        holder.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getUserData(position, holder);
-                Intent intent = new Intent(context, LearnActivity.class);
-                intent.putExtra("selectedTopic", prepositionsModels.get(position).getPrepostionName());
-                context.startActivity(intent);
-            }
+        holder.learnIcon.setOnClickListener(v -> {
+            Intent intent = new Intent(context, LearnActivity.class);
+            intent.putExtra("selectedTopic", prepositionsModels.get(position).getPrepositionName());
+            intent.putExtra("itemPosition", position);
+            context.startActivity(intent);
         });
     }
 
-
-
-    private UserData getUserData(int position, MyViewHolder holder) {
+    private void setupFirebaseListener(int position, MyViewHolder holder) {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users")
-                .child(userId).child("prepositions").child(prepositionsModels.get(position).getPrepostionName().replace(" ", ""));
+                .child(userId).child("prepositions").child(prepositionsModels.get(position).getPrepositionName().replace(" ", ""));
 
-        final ValueEventListener valueEventListener = new ValueEventListener() {
+        ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     int myProgress = snapshot.getValue(Integer.class);
-                    updateProgressBar(position, myProgress, holder);
-
-                    notifyItemChanged(position);
+                    if (holder.getAdapterPosition() == position) {
+                        prepositionsModels.get(position).setProgress(myProgress);
+                        holder.progressBar.setProgress(myProgress);
+                        holder.progressText.setText(myProgress + "% completed");
+                    }
                 } else {
+                    if (holder.getAdapterPosition() == position) {
+                        prepositionsModels.get(position).setProgress(0);
+                        holder.progressBar.setProgress(0);
+                        holder.progressText.setText("0% completed");
+                    }
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                if (holder.getAdapterPosition() == position) {
+                    holder.progressBar.setProgress(0);
+                    holder.progressText.setText("0% completed");
+                }
             }
         };
 
+        activeListeners.put(position, valueEventListener);
         userRef.addValueEventListener(valueEventListener);
-        return null;
     }
 
-    private void updateProgressBar(int position, int progress, MyViewHolder holder) {
-        prepositionsModels.get(position).setProgress(progress);
-        holder.progressBar.setProgress(progress);
+    private void removeListener(int position) {
+        if (activeListeners.containsKey(position)) {
+            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users")
+                    .child(userId).child("prepositions").child(prepositionsModels.get(position).getPrepositionName().replace(" ", ""));
+            userRef.removeEventListener(activeListeners.get(position));
+            activeListeners.remove(position);
+        }
+    }
+
+    public void cleanup() {
+        for (Map.Entry<Integer, ValueEventListener> entry : activeListeners.entrySet()) {
+            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users")
+                    .child(userId).child("prepositions").child(prepositionsModels.get(entry.getKey()).getPrepositionName().replace(" ", ""));
+            userRef.removeEventListener(entry.getValue());
+        }
+        activeListeners.clear();
+    }
+
+    @Override
+    public void onViewRecycled(@NonNull MyViewHolder holder) {
+        super.onViewRecycled(holder);
+        int position = holder.getAdapterPosition();
+        if (position != RecyclerView.NO_POSITION) {
+            removeListener(position);
+        }
     }
 
     @Override
@@ -108,15 +145,15 @@ public class PrepositionsRecyclerViewAdapter extends RecyclerView.Adapter<Prepos
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         ProgressBar progressBar;
         TextView prepositionName;
-        View imageView;
-        LinearLayout ll2;
+        TextView progressText;
+        ImageView learnIcon;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             prepositionName = itemView.findViewById(R.id.itemName);
-            imageView = itemView.findViewById(R.id.imageView3);
-            ll2 = itemView.findViewById(R.id.linearLayout2);
+            learnIcon = itemView.findViewById(R.id.imageView3);
             progressBar = itemView.findViewById(R.id.progressBar3);
+            progressText = itemView.findViewById(R.id.progressText);
         }
     }
 }

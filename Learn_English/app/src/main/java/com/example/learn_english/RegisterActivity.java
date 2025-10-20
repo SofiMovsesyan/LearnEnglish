@@ -48,13 +48,9 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        // Initialize animations
         animations = new Animations();
 
-        // Initialize views
         initializeViews();
-
-        // Setup animations
         setupAnimations();
 
         // Setup click listeners with animations
@@ -65,9 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void initializeViews() {
-        // Get the root ConstraintLayout
         rootLayout = findViewById(R.id.root_constraint);
-
         mainCard = findViewById(R.id.mainContent);
         err = findViewById(R.id.err);
 
@@ -82,7 +76,6 @@ public class RegisterActivity extends AppCompatActivity {
             });
         }
 
-        // Wave views
         waveHeaderA = findViewById(R.id.waveHeaderA);
         waveHeaderB = findViewById(R.id.waveHeaderB);
         waveLayer2A = findViewById(R.id.waveLayer2A);
@@ -90,13 +83,11 @@ public class RegisterActivity extends AppCompatActivity {
         waveLayer3A = findViewById(R.id.waveLayer3A);
         waveLayer3B = findViewById(R.id.waveLayer3B);
 
-        // Bubble views
         bubble1 = findViewById(R.id.bubble1);
         bubble2 = findViewById(R.id.bubble2);
         bubble3 = findViewById(R.id.bubble3);
         bubble4 = findViewById(R.id.bubble4);
 
-        // Form views
         alrhaveacc = findViewById(R.id.alrhaveacc);
         RegName = findViewById(R.id.RegName);
         RegEmail = findViewById(R.id.RegEmail);
@@ -109,45 +100,16 @@ public class RegisterActivity extends AppCompatActivity {
         View root = findViewById(android.R.id.content);
 
         animations.waitForLayout(root, () -> {
-            // Start wave animations if wave views exist
             if (waveHeaderA != null && waveHeaderB != null) {
                 animations.startWaveAnimations(waveHeaderA, waveHeaderB,
                         waveLayer2A, waveLayer2B, waveLayer3A, waveLayer3B);
             }
 
-            // Start bubble animations if bubble views exist
             if (bubble1 != null && bubble2 != null && bubble3 != null && bubble4 != null) {
                 animations.startBubbleAnimations(root, bubble1, bubble2, bubble3, bubble4);
             }
 
-            // Apply entrance animations to form elements
-            animateFormEntrance();
         });
-    }
-
-    private void animateFormEntrance() {
-        // Slide up and fade in the main card/content
-        View mainCard = findViewById(R.id.mainContent);
-        if (mainCard != null) {
-            animations.slideUpView(mainCard, 800);
-        }
-
-        // Staggered animation for form elements
-        new Handler().postDelayed(() -> {
-            if (RegName != null) animations.fadeInView(RegName, 400);
-        }, 200);
-
-        new Handler().postDelayed(() -> {
-            if (RegEmail != null) animations.fadeInView(RegEmail, 400);
-        }, 400);
-
-        new Handler().postDelayed(() -> {
-            if (RegPassword != null) animations.fadeInView(RegPassword, 400);
-        }, 600);
-
-        new Handler().postDelayed(() -> {
-            if (ConfPass != null) animations.fadeInView(ConfPass, 400);
-        }, 800);
     }
 
     private void setupClickListenersWithAnimations() {
@@ -238,7 +200,6 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    // Beautiful error message methods
     private void showBeautifulError(String message) {
         if (err != null) {
             animations.showErrorWithAnimation(err, message);

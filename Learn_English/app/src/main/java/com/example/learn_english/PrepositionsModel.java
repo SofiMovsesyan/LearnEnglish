@@ -9,7 +9,7 @@ public class PrepositionsModel {
         this.progress = progress;
     }
 
-    public String getPrepostionName() {
+    public String getPrepositionName() {
         return prepostionName;
     }
 
