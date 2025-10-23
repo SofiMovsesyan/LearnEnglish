@@ -138,7 +138,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="130dp"
         android:layout_marginEnd="24dp"
-        app:cardBackgroundColor="@android:color/white"
+        app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="28dp"
         app:cardElevation="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -148,70 +148,118 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="24dp"
-            android:gravity="center_vertical">
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:gravity="center">
 
             <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/ic_profile"
-                android:background="@drawable/circle_purple_gradient"
-                android:padding="12dp"
-                app:tint="@android:color/white" />
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_app"
+                app:tint="@null" />
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginStart="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/welcome_back"
-                    android:textColor="@color/gradient_purple_dark"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/polayfairdisplay_regular" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/ready_to_continue_learning"
-                    android:textColor="#666666"
-                    android:textSize="14sp"
-                    android:layout_marginTop="2dp" />
-
-            </LinearLayout>
-
-            <LinearLayout
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:text="@string/welcome_back"
+                android:textColor="@color/gradient_purple_dark"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/polayfairdisplay_regular"
+                android:layout_marginBottom="4dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="🔥"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="3 days"
-                    android:textColor="@color/gradient_purple_dark"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="2dp" />
-
-            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/let_s_master_english_together"
+                android:textColor="#666666"
+                android:textSize="14sp"
+                android:gravity="center" />
 
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
+<!--    <com.google.android.material.card.MaterialCardView-->
+<!--        android:id="@+id/welcomeCard"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="24dp"-->
+<!--        android:layout_marginTop="130dp"-->
+<!--        android:layout_marginEnd="24dp"-->
+<!--        app:cardBackgroundColor="@android:color/white"-->
+<!--        app:cardCornerRadius="28dp"-->
+<!--        app:cardElevation="16dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:padding="24dp"-->
+<!--            android:gravity="center_vertical">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="60dp"-->
+<!--                android:layout_height="60dp"-->
+<!--                android:src="@drawable/ic_profile"-->
+<!--                android:background="@drawable/circle_purple_gradient"-->
+<!--                android:padding="12dp"-->
+<!--                app:tint="@android:color/white" />-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:orientation="vertical"-->
+<!--                android:layout_marginStart="16dp">-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/welcome_back"-->
+<!--                    android:textColor="@color/gradient_purple_dark"-->
+<!--                    android:textSize="20sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:fontFamily="@font/polayfairdisplay_regular" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/ready_to_continue_learning"-->
+<!--                    android:textColor="#666666"-->
+<!--                    android:textSize="14sp"-->
+<!--                    android:layout_marginTop="2dp" />-->
+
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="vertical"-->
+<!--                android:gravity="center">-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="🔥"-->
+<!--                    android:textSize="16sp" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="3 days"-->
+<!--                    android:textColor="@color/gradient_purple_dark"-->
+<!--                    android:textSize="12sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:layout_marginTop="2dp" />-->
+
+<!--            </LinearLayout>-->
+
+<!--        </LinearLayout>-->
+
+<!--    </com.google.android.material.card.MaterialCardView>-->
     -->
        <!-- <com.google.android.material.card.MaterialCardView
             android:id="@+id/welcomeCard"

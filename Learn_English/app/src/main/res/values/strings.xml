@@ -84,5 +84,6 @@ The formula for asking a question in the simple present is do/does + [subject] +
     <string name="tenses">Tenses</string>
     <string name="learning_categories">Learning Categories</string>
     <string name="ready_to_continue_learning">Ready to continue learning?</string>
+    <string name="let_s_master_english_together">Let\'s master English together🌟</string>
 
 </resources>
