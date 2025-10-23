@@ -4,57 +4,330 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LearnActivity"
-    android:background="@color/my_bg">
+    android:background="@drawable/gradient_background"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    tools:context=".LearnActivity">
+
+    <!-- Enhanced Wave Headers with More Layers -->
+    <FrameLayout
+        android:id="@+id/waveHeader_container"
+        android:layout_width="0dp"
+        android:layout_height="260dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/waveHeaderA"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/wave_header" />
+
+        <ImageView
+            android:id="@+id/waveHeaderB"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/wave_header" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/waveLayer2_container"
+        android:layout_width="0dp"
+        android:layout_height="280dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/waveLayer2A"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:alpha="0.7"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/wave_header" />
+
+        <ImageView
+            android:id="@+id/waveLayer2B"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:alpha="0.7"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/wave_header" />
+    </FrameLayout>
+
+    <!-- More Bubbles for Better Effect -->
+    <ImageView
+        android:id="@+id/bubble1"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="160dp"
+        android:alpha="0.7"
+        android:src="@drawable/bubble"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/bubble2"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="80dp"
+        android:alpha="0.5"
+        android:src="@drawable/bubble"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/bubble3"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="100dp"
+        android:alpha="0.6"
+        android:src="@drawable/bubble"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Enhanced Header with Icon -->
+    <LinearLayout
+        android:id="@+id/header_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:scaleType="fitXY"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="24dp"
+        android:gravity="center"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/header" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/topicName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:fontFamily="@font/polayfairdisplay_regular"
-        android:text="Learn English"
-        android:textAlignment="center"
-        android:textColor="@color/my_bg"
-        android:textSize="39sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView2" />
+        <TextView
+            android:id="@+id/topicName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Learn English"
+            android:textColor="@android:color/white"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/polayfairdisplay_regular"
+            android:letterSpacing="0.02" />
 
-    <ScrollView
-        android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Expand Your Knowledge"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:alpha="0.9"
+            android:layout_marginTop="4dp"
+            android:letterSpacing="0.01" />
+
+    </LinearLayout>
+
+    <!-- Enhanced Content Card with Better Shadow -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/content_card"
+        android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="28dp"
+        app:cardElevation="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintBottom_toBottomOf="parent">
-        <FrameLayout
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/learn"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- Content Scroll -->
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:padding="20dp"
+                android:fadingEdgeLength="40dp"
+                android:requiresFadingEdge="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Enhanced Content Card -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="@color/gradient_purple_extra_light"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="6dp"
+                        app:strokeColor="@color/gradient_purple_light"
+                        app:strokeWidth="2dp"
+                        android:layout_marginBottom="20dp">
+
+                        <TextView
+                            android:id="@+id/learn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="28dp"
+                            android:text="Loading content..."
+                            android:textColor="@color/gradient_purple_dark"
+                            android:textSize="18sp"
+                            android:lineSpacingExtra="8sp"
+                            android:textIsSelectable="true"
+                            android:letterSpacing="0.01" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Enhanced Tips Section -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="@color/gradient_purple_dark"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="4dp"
+                        android:layout_marginBottom="20px">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:layout_marginBottom="12dp">
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/learning_tips"
+                                    android:textColor="@android:color/white"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/read_aloud_to_practice_pronunciation_n_take_notes_for_better_retention_n_review_regularly_to_reinforce_learning_n_focus_on_one_concept_at_a_time"
+                                android:textColor="@android:color/white"
+                                android:textSize="14sp"
+                                android:alpha="0.95"
+                                android:lineSpacingExtra="6sp" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+            </ScrollView>
+
+            <!-- Beautiful Listen Section -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView"
-                android:textSize="25sp"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
-                android:textColor="@color/my_purple_dark"
-                />
-        </FrameLayout>
-    </ScrollView>
+                android:layout_margin="12dp"
+                app:cardBackgroundColor="@color/gradient_purple_extra_light"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="6dp"
+                app:strokeColor="@color/gradient_purple_light"
+                app:strokeWidth="2dp">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="24dp"
+                    android:gravity="center">
+
+                    <!-- Enhanced Listen Button -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/speakBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="56dp"
+                        android:text="Listen to Content"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:paddingStart="32dp"
+                        android:paddingEnd="32dp"
+                        android:backgroundTint="@color/gradient_purple_dark"
+                        app:cornerRadius="28dp"
+                        app:icon="@drawable/ic_volume"
+                        app:iconTint="@android:color/white"
+                        app:iconSize="24dp"
+                        app:iconGravity="textStart"
+                        app:iconPadding="8dp"
+                        style="@style/Widget.Material3.Button.ElevatedButton" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Enhanced Loading Indicator -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/loading_card"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:visibility="visible"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="20dp">
+
+            <ProgressBar
+                android:id="@+id/loadingProgress"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:indeterminateTint="@color/gradient_purple_dark" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Loading..."
+                android:textColor="@color/gradient_purple_dark"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

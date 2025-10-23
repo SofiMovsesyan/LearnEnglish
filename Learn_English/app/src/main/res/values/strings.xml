@@ -85,5 +85,23 @@ The formula for asking a question in the simple present is do/does + [subject] +
     <string name="learning_categories">Learning Categories</string>
     <string name="ready_to_continue_learning">Ready to continue learning?</string>
     <string name="let_s_master_english_together">Let\'s master English together🌟</string>
+    <string name="question_will_appear_here">Question will appear here...</string>
+    <string name="next">Next</string>
+    <string name="option_4">Option 4</string>
+    <string name="option_3">Option 3</string>
+    <string name="option_2">Option 2</string>
+    <string name="option_1">Option 1</string>
+    <string name="english_quiz">English Quiz</string>
+    <string name="share">Share</string>
+    <string name="congratulations">Congratulations!</string>
+    <string name="you_ve_completed_the_quiz_successfully">You\'ve completed the quiz successfully</string>
+    <string name="your_score">Your Score</string>
+    <string name="correct">Correct</string>
+    <string name="incorrect">Incorrect</string>
+    <string name="home">Home</string>
+    <string name="your_results">Your Results</string>
+    <string name="words_quiz">Words Quiz</string>
+    <string name="learning_tips">Learning Tips</string>
+    <string name="read_aloud_to_practice_pronunciation_n_take_notes_for_better_retention_n_review_regularly_to_reinforce_learning_n_focus_on_one_concept_at_a_time">• Read aloud to practice pronunciation\n• Take notes for better retention\n• Review regularly to reinforce learning\n• Focus on one concept at a time</string>
 
 </resources>

@@ -4,151 +4,296 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/my_bg"
+    android:background="@drawable/gradient_background"
+    android:clipChildren="false"
+    android:clipToPadding="false"
     tools:context=".QuizResults">
 
-    <ImageView
-
-        android:id="@+id/imageView2"
+    <!-- Wave Headers -->
+    <FrameLayout
+        android:id="@+id/waveHeader_container"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:scaleType="fitXY"
+        android:layout_height="220dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/header" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:fontFamily="@font/polayfairdisplay_regular"
-        android:text="Your Results"
-        android:textAlignment="center"
-        android:textColor="@color/my_bg"
-        android:textSize="39sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView2" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="130dp"
-        android:gravity="center"
-        android:orientation="vertical">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/waveHeaderA"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:adjustViewBounds="true"
-            android:src="@drawable/winner" />
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/wave_header" />
+
+        <ImageView
+            android:id="@+id/waveHeaderB"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/wave_header" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/waveLayer2_container"
+        android:layout_width="0dp"
+        android:layout_height="240dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/waveLayer2A"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:alpha="0.8"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/wave_header" />
+
+        <ImageView
+            android:id="@+id/waveLayer2B"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:alpha="0.8"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/wave_header" />
+    </FrameLayout>
+
+    <!-- Bubbles -->
+    <ImageView
+        android:id="@+id/bubble1"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="140dp"
+        android:alpha="0.6"
+        android:src="@drawable/bubble"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/bubble2"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginEnd="60dp"
+        android:alpha="0.4"
+        android:src="@drawable/bubble"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/bubble3"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="90dp"
+        android:alpha="0.5"
+        android:src="@drawable/bubble"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Header Layout -->
+    <LinearLayout
+        android:id="@+id/header_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="24dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/topicName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:letterSpacing=".1"
-            android:text="Congratulations"
-            android:textColor="@color/my_purple_dark"
-            android:textSize="35sp"
-            android:textStyle="bold" />
+            android:text="@string/your_results"
+            android:textColor="@android:color/white"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/polayfairdisplay_regular"
+            android:layout_gravity="center_horizontal" />
 
-        <TextView
-            android:id="@+id/txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="30dp"
-            android:gravity="center"
-            android:letterSpacing=".1"
-            android:text="You've completed quiz successfully"
-            android:textColor="@color/my_purple_middle"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+    </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:gravity="center"
-            android:letterSpacing=".2"
-            android:text="Your score:"
-            android:textColor="@color/my_purple_light"
-            android:textSize="27sp"
-            android:textStyle="bold" />
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="300dp"
-            android:layout_height="10dp"
-            android:layout_marginStart="129dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="130dp"
-
-            android:progressDrawable="@drawable/progress_bar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.458" />
-
+    <!-- Results Content Card -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/results_content_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="32dp"
             android:gravity="center">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Correct: "
-                android:textAlignment="center"
-                android:textColor="@color/my_purple_middle"
-                android:textSize="27sp" />
+            <!-- Winner Image -->
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="150dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/winner"
+                android:layout_marginBottom="24dp" />
 
+            <!-- Congratulations Text -->
             <TextView
-                android:id="@+id/correct"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="X"
-                android:textAlignment="center"
-                android:textColor="@color/my_purple_dark"
-                android:textSize="25sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.483"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+                android:text="@string/congratulations"
+                android:textColor="@color/gradient_purple_dark"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginBottom="8dp" />
 
+            <!-- Completion Message -->
+            <TextView
+                android:id="@+id/txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/you_ve_completed_the_quiz_successfully"
+                android:textColor="@color/gradient_purple_middle"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:layout_marginBottom="32dp"
+                android:lineSpacingExtra="4sp" />
+
+            <!-- Score Text -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="20dp"
-                android:text="Incorrect: "
-                android:textAlignment="center"
-                android:textColor="@color/my_purple_middle"
-                android:textSize="27sp" />
-            <TextView
-                android:id="@+id/incorrect"
-                android:layout_width="wrap_content"
+                android:text="@string/your_score"
+                android:textColor="@color/gradient_purple_light"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Progress Bar -->
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="300dp"
+                android:layout_height="16dp"
+                android:layout_marginBottom="24dp"
+                android:progressDrawable="@drawable/progress_bar" />
+
+            <!-- Score Details -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Y"
-                android:textColor="@color/my_purple_dark"
-                android:textAlignment="center"
-                android:textSize="25sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="32dp">
+
+                <!-- Correct Answers -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/correct"
+                        android:textColor="@color/gradient_purple_middle"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:id="@+id/correct"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/gradient_purple_dark"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <!-- Divider -->
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="40dp"
+                    android:background="@color/gradient_purple_light"
+                    android:layout_marginHorizontal="16dp" />
+
+                <!-- Incorrect Answers -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/incorrect"
+                        android:textColor="@color/gradient_purple_middle"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:id="@+id/incorrect"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/gradient_purple_dark"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Action Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/homeBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/gradient_purple_dark"
+                    android:text="@string/home"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    app:cornerRadius="12dp" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
-
-    </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
