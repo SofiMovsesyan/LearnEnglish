@@ -1,107 +1,88 @@
 <resources>
     <string name="app_name">Learn English</string>
     <string-array name="tenses">
-        <item>Present Simple</item>
-        <item>Present Continuous</item>
-        <item>Present Perfect</item>
-        <item>Present Perfect Continuous</item>
-        <item>Past Simple</item>
-        <item>Past Continuous</item>
-        <item>Past Perfect</item>
-        <item>Past Perfect Continuous</item>
-        <item>Future Simple</item>
-        <item>Future Continuous</item>
-        <item>Future Perfect</item>
-        <item> Future Perfect Continuous</item>
+        <item>Ներկա պարզ</item>
+        <item>Ներկա շարունակական</item>
+        <item>Ներկա կատարյալ</item>
+        <item>Ներկա կատարյալ շարունակական</item>
+        <item>Անցյալ պարզ</item>
+        <item>Անցյալ շարունակական</item>
+        <item>Անցյալ կատարյալ</item>
+        <item>Անցյալ կատարյալ շարունակական</item>
+        <item>Ապառնի պարզ</item>
+        <item>Ապառնի շարունակական</item>
+        <item>Ապառնի կատարյալ</item>
+        <item>Ապառնի կատարյալ շարունակական</item>
 
     </string-array>
 
     <string-array name="prepositions">
-
-        <item>Simple Preposition</item>
-        <item>Double Preposition</item>
-        <item>Compound Preposition</item>
-        <item>Participle Preposition</item>
-        <item>Disguised Preposition</item>
-        <item>Detached Preposition</item>
-        <item>Prepositions of Time</item>
-
-        <item>Prepositions of Place and Direction</item>
-        <item>Prepositions of Agents or Things</item>
-        <item>Phrasal Prepositions</item>
-
+        <item>Պարզ նախդիր</item>
+        <item>Կրկնակի նախդիր</item>
+        <item>Բարդ նախդիր</item>
+        <item>Դերբայական նախդիր</item>
+        <item>Ուղղակի նախդիր</item>
+        <item>Անջատված նախդիր</item>
+        <item>Ժամանակի նախդիրներ</item>
+        <item>Տեղի և ուղղության նախդիրներ</item>
+        <item>Գործող անձի կամ առարկայի նախդիրներ</item>
+        <item>Բաղադրյալ նախդիրներ</item>
     </string-array>
 
-    <string-array name="words">
-        <item>Animals</item>
-        <item>Clothes and Accessories</item>
-        <item>Entertainment and Media</item>
-        <item>Food and Drink</item>
-        <item>Hobbies and Leisure</item>
-        <item>Sport</item>
-        <item>Weather</item>
+        <string-array name="words">
+            <item>Կենդանիներ</item>
+            <item>Հագուստ և Աքսեսուարներ</item>
+            <item>Զվարճանք և Մեդիա</item>
+            <item>Սնունդ և Խմիչք</item>
+            <item>Հոբբի և Հանգիստ</item>
+            <item>Սպորտ</item>
+            <item>Եղանակ</item>
+        </string-array>
 
-    </string-array>
-    <string name="PresentSimple">The simple present is a verb tense with two main uses. We use the simple present tense when an action is happening right now, or when it happens regularly (or unceasingly, which is why it’s sometimes called present indefinite). Depending on the person, the simple present tense is formed by using the root form or by adding s or es to the end.
-\n Example: I feel great! Pauline loves pie. I’m sorry to hear that you’re sick.\n
-The other is to talk about habitual actions or occurrences.\n
-Example: Pauline practices the piano every day. Ms. Jackson travels during the summer. Hamsters run all night.\n
-Typically, when we want to describe a temporary action that is currently in progress, we use the present continuous: Pauline can’t come to the phone right now because she is brushing her teeth.
-\n\nHow to make the simple present negative\n\n
-The formula for making a simple present verb negative is do/does + not + [root form of verb]. You can also use the contraction don’t or doesn’t instead of do not or does not.
-\n
-Example: Pauline does not want to share the pie.She doesn’t think there is enough to go around.
-Her friends do not agree. I don’t want pie anyway.
-\n
-To make the verb to be negative, the formula is [to be] + not.
-\nExample:
-I am not a pie lover, but Pauline sure is.
-You aren’t ready for such delicious pie.
-\n\nHow to ask a question\n\n
-The formula for asking a question in the simple present is do/does + [subject] + [root form of verb].
-\nExample: Do you know how to bake a pie? How much does Pauline love pie?
-
-
-    </string>
-    <string name="welcome">Welcome!</string>
-    <string name="sign_in_to_continue_your_journey">Sign in to continue your journey</string>
-    <string name="sign_in">SIGN IN</string>
-    <string name="create_account">CREATE ACCOUNT</string>
-    <string name="or">OR</string>
+    <string name="welcome">Բարի գալուստ</string>
+    <string name="sign_in_to_continue_your_journey">Մուտք գործեք՝ ձեր ճանապարհորդությունը շարունակելու համար</string>
+    <string name="sign_in">ՄՈՒՏՔ ԳՈՐԾԵԼ</string>
+    <string name="create_account">ՍՏԵՂԾԵԼ ՀԱՇԻՎ</string>
     <string name="learn_english">© 2025 Learn English.</string>
-    <string name="welcome_back">Welcome Back!</string>
-    <string name="sign_in_to_continue">Sign in to continue</string>
-    <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="forgot_password">Forgot Password?</string>
-    <string name="don_t_have_an_account">Don\'t have an account?</string>
-    <string name="log_out">Log Out</string>
-    <string name="prepositions">Prepositions</string>
-    <string name="learn_spatial_relationships">Learn spatial relationships</string>
-    <string name="expand_your_word_bank">Expand your word bank</string>
-    <string name="vocabulary">Vocabulary</string>
-    <string name="master_verb_tenses">Master verb tenses</string>
-    <string name="tenses">Tenses</string>
-    <string name="learning_categories">Learning Categories</string>
-    <string name="ready_to_continue_learning">Ready to continue learning?</string>
-    <string name="let_s_master_english_together">Let\'s master English together🌟</string>
-    <string name="question_will_appear_here">Question will appear here...</string>
-    <string name="next">Next</string>
-    <string name="option_4">Option 4</string>
-    <string name="option_3">Option 3</string>
-    <string name="option_2">Option 2</string>
-    <string name="option_1">Option 1</string>
-    <string name="english_quiz">English Quiz</string>
-    <string name="share">Share</string>
-    <string name="congratulations">Congratulations!</string>
-    <string name="you_ve_completed_the_quiz_successfully">You\'ve completed the quiz successfully</string>
-    <string name="your_score">Your Score</string>
-    <string name="correct">Correct</string>
-    <string name="incorrect">Incorrect</string>
-    <string name="home">Home</string>
-    <string name="your_results">Your Results</string>
-    <string name="words_quiz">Words Quiz</string>
-    <string name="learning_tips">Learning Tips</string>
+
+    <string name="sign_in_to_continue">Մուտք գործեք շարունակելու համար</string>
+    <string name="email">Էլ. փոստ</string>
+    <string name="password">Գաղտնաբառ</string>
+    <string name="don_t_have_an_account">Չունե՞ք հաշիվ</string>
+    <string name="log_out">Դուրս գալ</string>
+
+
+    <string name="prepositions">Նախդիրներ</string>
+    <string name="learn_spatial_relationships">Սովորիր տարածական հարաբերությունները</string>
+    <string name="expand_your_word_bank">Ընդլայնիր բառապաշարդ</string>
+    <string name="vocabulary">Բառապաշար</string>
+    <string name="master_verb_tenses">Տիրապետեք բայի ժամանակաձևերին</string>
+    <string name="tenses">Ժամանակաձևեր</string>
+    <string name="learning_categories">Ուսումնական կատեգորիաներ</string>
+    <string name="ready_to_continue_learning">Պատրա՞ստ եք շարունակել ուսումը</string>
+    <string name="let_s_master_english_together">Եկեք միասին տիրապետենք անգլերենին🌟</string>
+    <string name="question_will_appear_here">Հարցը կհայտնվի այստեղ...</string>
+    <string name="next">Հաջորդը</string>
+    <string name="option_4">Տարբերակ 4</string>
+    <string name="option_3">Տարբերակ 3</string>
+    <string name="option_2">Տարբերակ 2</string>
+    <string name="option_1">Տարբերակ 1</string>
+    <string name="english_quiz">Անգլերենի վիկտորինա</string>
+
+    <string name="congratulations">Շնորհավորում ենք</string>
+    <string name="you_ve_completed_the_quiz_successfully">Դուք հաջողությամբ ավարտեցիք վիկտորինան</string>
+    <string name="your_score">Ձեր միավորը</string>
+    <string name="correct">Ճիշտ</string>
+    <string name="incorrect">Սխալ</string>
+    <string name="home">Գլխավոր</string>
+    <string name="your_results">Ձեր արդյունքները</string>
+    <string name="words_quiz">Բառերի վիկտորինա</string>
+    <string name="learning_tips">Ուսուցման խորհուրդներ</string>
     <string name="read_aloud_to_practice_pronunciation_n_take_notes_for_better_retention_n_review_regularly_to_reinforce_learning_n_focus_on_one_concept_at_a_time">• Read aloud to practice pronunciation\n• Take notes for better retention\n• Review regularly to reinforce learning\n• Focus on one concept at a time</string>
+    <string name="sign_up_to_get_started">Գրանցվեք սկսելու համար</string>
+    <string name="full_name">Ամբողջական անուն</string>
+    <string name="confirm_password">Հաստատել գաղտնաբառը</string>
+    <string name="already_have_an_account">Արդեն ունե՞ք հաշիվ</string>
+    <string name="completed">65% անցած է</string>
 
 </resources>

@@ -253,9 +253,9 @@ public class QuizResults extends AppCompatActivity {
 
         // Set initial text (counters will animate later)
         if (correctAnswers <= 5) {
-            textView.setText("You can do better!");
+            textView.setText("Դուք հաջողությամբ ավարտեցիք վիկտորինան");
         } else {
-            textView.setText("You've completed quiz successfully");
+            textView.setText("Դուք հաջողությամբ ավարտեցիք վիկտորինան");
         }
 
         // Calculate and set progress with animation

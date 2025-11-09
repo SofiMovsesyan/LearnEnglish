@@ -50,7 +50,7 @@ public class WordsRecyclerViewAdapter extends RecyclerView.Adapter<WordsRecycler
         // Set initial data
         holder.wordName.setText(wordsModel.getWordsName());
         holder.progressBar.setProgress(wordsModel.getProgress());
-        holder.progressText.setText(wordsModel.getProgress() + "% completed");
+        holder.progressText.setText(wordsModel.getProgress() + "% անցած է");
 
         // Remove any existing listener for this position
         removeListener(position);
@@ -94,13 +94,13 @@ public class WordsRecyclerViewAdapter extends RecyclerView.Adapter<WordsRecycler
                     if (holder.getAdapterPosition() == position) {
                         wordsModels.get(position).setProgress(myProgress);
                         holder.progressBar.setProgress(myProgress);
-                        holder.progressText.setText(myProgress + "% completed");
+                        holder.progressText.setText(myProgress + "% անցած է");
                     }
                 } else {
                     if (holder.getAdapterPosition() == position) {
                         wordsModels.get(position).setProgress(0);
                         holder.progressBar.setProgress(0);
-                        holder.progressText.setText("0% completed");
+                        holder.progressText.setText("0% անցած է");
                     }
                 }
             }
@@ -109,7 +109,7 @@ public class WordsRecyclerViewAdapter extends RecyclerView.Adapter<WordsRecycler
             public void onCancelled(@NonNull DatabaseError error) {
                 if (holder.getAdapterPosition() == position) {
                     holder.progressBar.setProgress(0);
-                    holder.progressText.setText("0% completed");
+                    holder.progressText.setText("0% անցած է");
                 }
             }
         };

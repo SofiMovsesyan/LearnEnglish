@@ -47,7 +47,7 @@ public class PrepositionsRecyclerViewAdapter extends RecyclerView.Adapter<Prepos
         // Set initial data
         holder.prepositionName.setText(model.getPrepositionName());
         holder.progressBar.setProgress(model.getProgress());
-        holder.progressText.setText(model.getProgress() + "% completed");
+        holder.progressText.setText(model.getProgress() + "% անցած է");
 
         // Remove any existing listener for this position
         removeListener(position);
@@ -84,13 +84,13 @@ public class PrepositionsRecyclerViewAdapter extends RecyclerView.Adapter<Prepos
                     if (holder.getAdapterPosition() == position) {
                         prepositionsModels.get(position).setProgress(myProgress);
                         holder.progressBar.setProgress(myProgress);
-                        holder.progressText.setText(myProgress + "% completed");
+                        holder.progressText.setText(myProgress + "% անցած է");
                     }
                 } else {
                     if (holder.getAdapterPosition() == position) {
                         prepositionsModels.get(position).setProgress(0);
                         holder.progressBar.setProgress(0);
-                        holder.progressText.setText("0% completed");
+                        holder.progressText.setText("0% անցած է");
                     }
                 }
             }
@@ -99,7 +99,7 @@ public class PrepositionsRecyclerViewAdapter extends RecyclerView.Adapter<Prepos
             public void onCancelled(@NonNull DatabaseError error) {
                 if (holder.getAdapterPosition() == position) {
                     holder.progressBar.setProgress(0);
-                    holder.progressText.setText("0% completed");
+                    holder.progressText.setText("0% անցած է");
                 }
             }
         };

@@ -142,7 +142,7 @@ public class QuizActivityWords extends AppCompatActivity {
         curQuestPos++;
 
         if (curQuestPos == (questionsLists.size() - 1)) {
-            nextBtn.setText("Finish");
+            nextBtn.setText("Ավարտ");
         } else if (curQuestPos == questionsLists.size()) {
             ForRes();
             return;

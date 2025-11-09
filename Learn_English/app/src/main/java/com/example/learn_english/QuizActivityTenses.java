@@ -155,7 +155,7 @@ public class QuizActivityTenses extends AppCompatActivity {
 
         // Show countdown animation on next button
         if (nextBtn != null) {
-            nextBtn.setText("Next (5)");
+            nextBtn.setText("Հաջորդը (5)");
             startCountdownAnimation();
         }
     }
@@ -167,7 +167,7 @@ public class QuizActivityTenses extends AppCompatActivity {
             public void run() {
                 if (countdown[0] > 1 && nextBtn != null && !isFinishing()) {
                     countdown[0]--;
-                    nextBtn.setText("Next (" + countdown[0] + ")");
+                    nextBtn.setText("Հաջորդը (" + countdown[0] + ")");
                     countdownHandler.postDelayed(this, 1000);
                 }
             }
@@ -183,7 +183,7 @@ public class QuizActivityTenses extends AppCompatActivity {
             countdownHandler.removeCallbacksAndMessages(null);
         }
         if (nextBtn != null && !isFinishing()) {
-            nextBtn.setText(curQuestPos == (questionsLists.size() - 1) ? "Finish" : "Next");
+            nextBtn.setText(curQuestPos == (questionsLists.size() - 1) ? "Ավարտ" : "Հաջորդը");
         }
     }
 

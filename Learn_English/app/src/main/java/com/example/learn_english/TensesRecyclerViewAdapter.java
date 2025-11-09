@@ -47,7 +47,7 @@ public class TensesRecyclerViewAdapter extends RecyclerView.Adapter<TensesRecycl
         // Set initial data
         holder.tenseName.setText(tensesModel.getTenseName());
         holder.progressBar.setProgress(tensesModel.getProgress());
-        holder.progressText.setText(tensesModel.getProgress() + "% completed");
+        holder.progressText.setText(tensesModel.getProgress() + "% անցած է");
 
         // Remove any existing listener for this position
         removeListener(position);
@@ -91,14 +91,14 @@ public class TensesRecyclerViewAdapter extends RecyclerView.Adapter<TensesRecycl
                     if (holder.getAdapterPosition() == position) {
                         tensesModels.get(position).setProgress(myProgress);
                         holder.progressBar.setProgress(myProgress);
-                        holder.progressText.setText(myProgress + "% completed");
+                        holder.progressText.setText(myProgress + "% անցած է");
                     }
                 } else {
                     // If no progress exists, set to 0
                     if (holder.getAdapterPosition() == position) {
                         tensesModels.get(position).setProgress(0);
                         holder.progressBar.setProgress(0);
-                        holder.progressText.setText("0% completed");
+                        holder.progressText.setText("0% անցած է");
                     }
                 }
             }
@@ -108,7 +108,7 @@ public class TensesRecyclerViewAdapter extends RecyclerView.Adapter<TensesRecycl
                 // Handle error
                 if (holder.getAdapterPosition() == position) {
                     holder.progressBar.setProgress(0);
-                    holder.progressText.setText("0% completed");
+                    holder.progressText.setText("0% անցած է");
                 }
             }
         };
