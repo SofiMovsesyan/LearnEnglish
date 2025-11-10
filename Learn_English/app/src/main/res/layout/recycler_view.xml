@@ -55,7 +55,10 @@
                 android:layout_height="8dp"
                 android:progress="65"
                 android:progressTint="@color/gradient_purple_dark"
-                android:backgroundTint="#E0E0E0" />
+                android:progressBackgroundTint="#E0E0E0"
+                android:indeterminate="false"
+                android:max="100"
+                android:clipToOutline="true" />
 
             <TextView
                 android:id="@+id/progressText"
