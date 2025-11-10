@@ -126,6 +126,51 @@ public class LearnActivity extends AppCompatActivity implements TextToSpeech.OnI
         });
     }
 
+    private String transliterateArmenianToLatin(String text) {
+        if (text == null) return "";
+
+        return text
+                .replace("Ա", "A").replace("ա", "a")
+                .replace("Բ", "B").replace("բ", "b")
+                .replace("Գ", "G").replace("գ", "g")
+                .replace("Դ", "D").replace("դ", "d")
+                .replace("Ե", "Ye").replace("ե", "e")
+                .replace("Զ", "Z").replace("զ", "z")
+                .replace("Է", "E").replace("է", "e")
+                .replace("Ը", "Yë").replace("ը", "ë")
+                .replace("Թ", "T’").replace("թ", "t’")
+                .replace("Ժ", "Zh").replace("ժ", "zh")
+                .replace("Ի", "EE").replace("ի", "ee")
+                .replace("Լ", "L").replace("լ", "l")
+                .replace("Խ", "Kh").replace("խ", "kh")
+                .replace("Ծ", "Ts").replace("ծ", "ts")
+                .replace("Կ", "K").replace("կ", "k")
+                .replace("Հ", "H").replace("հ", "h")
+                .replace("Ձ", "Dz").replace("ձ", "dz")
+                .replace("Ղ", "Gh").replace("ղ", "gh")
+                .replace("Ճ", "Ch").replace("ճ", "ch")
+                .replace("Մ", "M").replace("մ", "m")
+                .replace("Յ", "Y").replace("յ", "y")
+                .replace("Ն", "N").replace("ն", "n")
+                .replace("Շ", "Sh").replace("շ", "sh")
+                .replace("Ո", "Vo").replace("ո", "o")
+                .replace("Չ", "Ch’").replace("չ", "ch’")
+                .replace("Պ", "P").replace("պ", "p")
+                .replace("Ջ", "J").replace("ջ", "j")
+                .replace("Ռ", "Rr").replace("ռ", "rr")
+                .replace("Ս", "S").replace("ս", "s")
+                .replace("Վ", "V").replace("վ", "v")
+                .replace("Տ", "T").replace("տ", "t")
+                .replace("Ր", "R").replace("ր", "r")
+                .replace("Ց", "Ts’").replace("ց", "ts’")
+                .replace("Ւ", "W").replace("ւ", "w")
+                .replace("Փ", "P’").replace("փ", "p’")
+                .replace("Ք", "K’").replace("ք", "k’")
+                .replace("Օ", "O").replace("օ", "o")
+                .replace("Ֆ", "F").replace("ֆ", "f");
+    }
+
+
     @Override
     public void onInit(int status) {
         if (status == TextToSpeech.SUCCESS) {
@@ -144,6 +189,7 @@ public class LearnActivity extends AppCompatActivity implements TextToSpeech.OnI
             speakBtn.setEnabled(false);
         }
     }
+
 
     private void setupAnimations() {
         animations = new Animations();
@@ -186,18 +232,20 @@ public class LearnActivity extends AppCompatActivity implements TextToSpeech.OnI
             return;
         }
 
-        String textToSpeak = tvLearn.getText().toString();
+        String textToSpeak = tvLearn.getText().toString().trim();
         if (textToSpeak.isEmpty() || textToSpeak.equals("Loading content...")) {
             Toast.makeText(this, "No content to speak", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Clear any previous speech
+        // Transliterate Armenian letters to Latin (so English TTS can read it)
+        textToSpeak = transliterateArmenianToLatin(textToSpeak);
+
+        textToSpeech.setLanguage(Locale.US);
         textToSpeech.stop();
 
-        // Speak the text
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            textToSpeech.speak(textToSpeak, TextToSpeech.QUEUE_FLUSH, null, "LearnEnglishUtterance");
+            textToSpeech.speak(textToSpeak, TextToSpeech.QUEUE_FLUSH, null, "LearnUtterance");
         } else {
             textToSpeech.speak(textToSpeak, TextToSpeech.QUEUE_FLUSH, null);
         }

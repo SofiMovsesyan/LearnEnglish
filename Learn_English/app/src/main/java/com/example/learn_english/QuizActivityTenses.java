@@ -155,7 +155,10 @@ public class QuizActivityTenses extends AppCompatActivity {
 
         // Show countdown animation on next button
         if (nextBtn != null) {
-            nextBtn.setText("Հաջորդը (5)");
+            if (nextBtn != null) {
+                String btnText = curQuestPos == questionsLists.size() - 1 ? "Ավարտ (5) " : "Հաջորդը (5)";
+                nextBtn.setText(btnText);
+            }
             startCountdownAnimation();
         }
     }
@@ -360,7 +363,7 @@ public class QuizActivityTenses extends AppCompatActivity {
         curQuestPos++;
 
         if (curQuestPos == (questionsLists.size() - 1)) {
-            if (nextBtn != null) nextBtn.setText("Finish");
+            if (nextBtn != null) nextBtn.setText("Ավարտ");
         } else if (curQuestPos == questionsLists.size()) {
             flag = true;
         }

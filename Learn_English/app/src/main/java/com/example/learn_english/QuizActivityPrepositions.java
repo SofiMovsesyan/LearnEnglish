@@ -154,7 +154,10 @@ public class QuizActivityPrepositions extends AppCompatActivity {
 
         // Show countdown animation on next button
         if (nextBtn != null) {
-            nextBtn.setText("Հաջորդը (5)");
+            if (nextBtn != null) {
+                String btnText = curQuestPos == questionsLists.size() - 1 ? "Ավարտ (5) " : "Հաջորդը (5)";
+                nextBtn.setText(btnText);
+            }
             startCountdownAnimation();
         }
     }

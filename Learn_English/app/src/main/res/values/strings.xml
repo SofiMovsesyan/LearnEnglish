@@ -1,32 +1,32 @@
 <resources>
     <string name="app_name">Learn English</string>
     <string-array name="tenses">
-        <item>Ներկա պարզ</item>
-        <item>Ներկա շարունակական</item>
-        <item>Ներկա կատարյալ</item>
-        <item>Ներկա կատարյալ շարունակական</item>
-        <item>Անցյալ պարզ</item>
-        <item>Անցյալ շարունակական</item>
-        <item>Անցյալ կատարյալ</item>
-        <item>Անցյալ կատարյալ շարունակական</item>
-        <item>Ապառնի պարզ</item>
-        <item>Ապառնի շարունակական</item>
-        <item>Ապառնի կատարյալ</item>
-        <item>Ապառնի կատարյալ շարունակական</item>
+        <item>Present Simple</item>
+        <item>Present Continuous</item>
+        <item>Present Perfect</item>
+        <item>Present Perfect Continuous</item>
+        <item>Past Simple</item>
+        <item>Past Continuous</item>
+        <item>Past Perfect</item>
+        <item>Past Perfect Continuous</item>
+        <item>Future Simple</item>
+        <item>Future Continuous</item>
+        <item>Future Perfect</item>
+        <item> Future Perfect Continuous</item>
 
     </string-array>
 
     <string-array name="prepositions">
-        <item>Պարզ նախդիր</item>
-        <item>Կրկնակի նախդիր</item>
-        <item>Բարդ նախդիր</item>
-        <item>Դերբայական նախդիր</item>
-        <item>Ուղղակի նախդիր</item>
-        <item>Անջատված նախդիր</item>
-        <item>Ժամանակի նախդիրներ</item>
-        <item>Տեղի և ուղղության նախդիրներ</item>
-        <item>Գործող անձի կամ առարկայի նախդիրներ</item>
-        <item>Բաղադրյալ նախդիրներ</item>
+        <item>Simple Preposition</item>
+        <item>Double Preposition</item>
+        <item>Compound Preposition</item>
+        <item>Participle Preposition</item>
+        <item>Disguised Preposition</item>
+        <item>Detached Preposition</item>
+        <item>Prepositions of Time</item>
+        <item>Prepositions of Place and Direction</item>
+        <item>Prepositions of Agents or Things</item>
+        <item>Phrasal Prepositions</item>
     </string-array>
 
         <string-array name="words">
