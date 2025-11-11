@@ -78,7 +78,12 @@
     <string name="your_results">Ձեր արդյունքները</string>
     <string name="words_quiz">Բառերի վիկտորինա</string>
     <string name="learning_tips">Ուսուցման խորհուրդներ</string>
-    <string name="read_aloud_to_practice_pronunciation_n_take_notes_for_better_retention_n_review_regularly_to_reinforce_learning_n_focus_on_one_concept_at_a_time">• Read aloud to practice pronunciation\n• Take notes for better retention\n• Review regularly to reinforce learning\n• Focus on one concept at a time</string>
+    <string name="read_aloud_to_practice_pronunciation_n_take_notes_for_better_retention_n_review_regularly_to_reinforce_learning_n_focus_on_one_concept_at_a_time">
+• Բարձրաձայն կարդա՝ արտասանությունը վարժելու համար\n
+• Գրառումներ արա՝ ավելի լավ հիշելու համար\n
+• Կանոնավոր վերանայիր՝ սովորածը ամրապնդելու համար\n
+• Կենտրոնացիր մեկ գաղափարի վրա՝ միաժամանակ
+</string>
     <string name="sign_up_to_get_started">Գրանցվեք սկսելու համար</string>
     <string name="full_name">Ամբողջական անուն</string>
     <string name="confirm_password">Հաստատել գաղտնաբառը</string>

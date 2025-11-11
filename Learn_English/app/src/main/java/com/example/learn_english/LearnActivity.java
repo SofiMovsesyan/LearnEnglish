@@ -97,7 +97,7 @@ public class LearnActivity extends AppCompatActivity implements TextToSpeech.OnI
             public void onStart(String utteranceId) {
                 runOnUiThread(() -> {
                     isSpeaking = true;
-                    speakBtn.setText("Stop Listening");
+                    speakBtn.setText("Կանգնեցնել");
                     speakBtn.setBackgroundTintList(getColorStateList(R.color.gradient_purple_light));
                     animateSpeakingPulse();
                 });
@@ -107,7 +107,7 @@ public class LearnActivity extends AppCompatActivity implements TextToSpeech.OnI
             public void onDone(String utteranceId) {
                 runOnUiThread(() -> {
                     isSpeaking = false;
-                    speakBtn.setText("Listen to Content");
+                    speakBtn.setText("Լսել բովանդակությունը");
                     speakBtn.setBackgroundTintList(getColorStateList(R.color.gradient_purple_dark));
                     stopSpeakingPulse();
                 });
@@ -117,7 +117,7 @@ public class LearnActivity extends AppCompatActivity implements TextToSpeech.OnI
             public void onError(String utteranceId) {
                 runOnUiThread(() -> {
                     isSpeaking = false;
-                    speakBtn.setText("Listen to Content");
+                    speakBtn.setText("Լսել բովանդակությունը");
                     speakBtn.setBackgroundTintList(getColorStateList(R.color.gradient_purple_dark));
                     stopSpeakingPulse();
                     Toast.makeText(LearnActivity.this, "Speech error occurred", Toast.LENGTH_SHORT).show();
@@ -255,7 +255,7 @@ public class LearnActivity extends AppCompatActivity implements TextToSpeech.OnI
         if (textToSpeech != null) {
             textToSpeech.stop();
             isSpeaking = false;
-            speakBtn.setText("Listen to Content");
+            speakBtn.setText("Լսել բովանդակությունը");
             speakBtn.setBackgroundTintList(getColorStateList(R.color.gradient_purple_dark));
             stopSpeakingPulse();
         }

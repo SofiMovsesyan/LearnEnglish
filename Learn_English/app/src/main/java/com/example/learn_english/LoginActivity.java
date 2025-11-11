@@ -152,15 +152,15 @@ public class LoginActivity extends AppCompatActivity {
 
         if (!email.matches(emailPattern)) {
             animations.shakeView(LogEmail);
-            showBeautifulError("Please enter a valid email address");
+            showBeautifulError("Խնդրում ենք մուտքագրել վավեր էլ․ փոստի հասցե");
             LogEmail.requestFocus();
         } else if (password.isEmpty() || password.length() < 8) {
             animations.shakeView(LogPassword);
-            showBeautifulError("Password must be at least 8 characters");
+            showBeautifulError("Գաղտնաբառը պետք է պարունակի առնվազն 8 նիշ");
             LogPassword.requestFocus();
         } else {
-            progressDialog.setMessage("Please Wait While Login...");
-            progressDialog.setTitle("Login");
+            progressDialog.setMessage("Խնդրում ենք սպասել՝ մուտք է կատարվում...");
+            progressDialog.setTitle("Մուտք");
             progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
 
@@ -175,7 +175,7 @@ public class LoginActivity extends AppCompatActivity {
                             editor.apply();
                             progressDialog.dismiss();
 
-                            showBeautifulSuccess("Login successful! Welcome back!");
+                            showBeautifulSuccess("Մուտքն հաջողվեց։ Բարի վերադարձ!");
 
                             new Handler().postDelayed(() -> {
                                 sendUserToNextActivity();
@@ -183,13 +183,13 @@ public class LoginActivity extends AppCompatActivity {
 
                         } else {
                             progressDialog.dismiss();
-                            showBeautifulError("Please verify your email before logging in");
+                            showBeautifulError("Խնդրում ենք հաստատել ձեր էլ․ փոստը մուտք գործելուց առաջ");
                             mAuth.signOut();
                         }
                     }
                 } else {
                     progressDialog.dismiss();
-                    showBeautifulError("Invalid email or password. Please try again.");
+                    showBeautifulError("Սխալ էլ․ փոստ կամ գաղտնաբառ։ Փորձեք նորից։");
                 }
             });
         }

@@ -167,34 +167,34 @@ public class RegisterActivity extends AppCompatActivity {
 
         if (name.isEmpty()) {
             animations.shakeView(RegName);
-            showBeautifulError("Please enter your full name");
+            showBeautifulError("Խնդրում ենք մուտքագրել ձեր անունը");
             RegName.requestFocus();
         } else if (!email.matches(emailPattern)) {
             animations.shakeView(RegEmail);
-            showBeautifulError("Please enter a valid email address");
+            showBeautifulError("Խնդրում ենք մուտքագրել վավեր էլ. հասցե");
             RegEmail.requestFocus();
         } else if (password.isEmpty() || password.length() < 8) {
             animations.shakeView(RegPassword);
-            showBeautifulError("Password must be at least 8 characters");
+            showBeautifulError("Գաղտնաբառը պետք է լինի առնվազն 8 նիշ");
             RegPassword.requestFocus();
         } else if (!password.equals(confirmPass)) {
             animations.shakeView(ConfPass);
-            showBeautifulError("Passwords do not match");
+            showBeautifulError("Գաղտնաբառերը չեն համընկնում");
             ConfPass.requestFocus();
         } else {
-            progressDialog.setMessage("Please Wait While Registration...");
-            progressDialog.setTitle("Registration");
+            progressDialog.setMessage("Խնդրում ենք սպասել գրանցման ընթացքում....");
+            progressDialog.setTitle("Գրանցում");
             progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
 
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            showBeautifulSuccess("Registration successful! Sending verification email...");
+                            showBeautifulSuccess("Գրանցումն ավարտված է։ Ուղարկվում է հաստատման նամակ...");
                             sendVerificationEmail();
                         } else {
                             progressDialog.dismiss();
-                            showBeautifulError("Registration failed: " + task.getException().getMessage());
+                            showBeautifulError("Գրանցումը ձախողվեց․ " + task.getException().getMessage());
                         }
                     });
         }
@@ -245,14 +245,14 @@ public class RegisterActivity extends AppCompatActivity {
                         usersRef.child(userId).setValue(user);
 
                         progressDialog.dismiss();
-                        showBeautifulSuccess("Verification email sent! Please check your inbox.");
+                        showBeautifulSuccess("Հաստատման նամակը ուղարկված է։ Խնդրում ենք ստուգել ձեր էլ. փոստը։");
 
                         new Handler().postDelayed(() -> {
                             sendUserToNextActivity();
                         }, 2000);
                     } else {
                         progressDialog.dismiss();
-                        showBeautifulError("Failed to send verification email. Please try again.");
+                        showBeautifulError("Չհաջողվեց ուղարկել հաստատման նամակը։ Փորձեք կրկին։");
                     }
                 }
             });
